@@ -1,0 +1,24 @@
+stories
+	id
+	...
+
+stories_shared_with_guests
+	story_id
+	guest_id / email
+
+guests
+	id
+	email
+	current_token
+
+
+1. Author "shares" with Bob
+	INSERT INTO guests (email) VALUES ('bob@bob.com');
+	INSERT INTO stories_shared_with_guests (story_id, email) VALUES ('5', 'bob@bob.com');
+		
+	random_onetime_token = random();
+	UPDATE guests SET current_token=random_onetime_token WHERE email='bob@bob.com';
+	// Send an email with that token in the link:
+	// <a href="storysite.com/guestlogin.php?token=$random_onetime_token">View story</a>
+	UPDATE guests SET current_token=null WHERE email='bob@bob.com';
+
