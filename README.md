@@ -15,14 +15,22 @@ installing docker then install [fig](http://www.fig.sh/) like this:
 
     pip install fig
 
-Start afresh with:
+Start afresh and make a new database:
 
     fig rm --force && fig up db
 
-Press Control-C then:
+Press Control-C then bring up the database:
 
-    fig build && fig up
+    fig start db
 
-Restart with:
+Start/restart the web app:
 
-    fig build && fig up
+    fig build && fig up web
+
+Stop everything:
+
+    fig stop
+
+Destroy everything:
+    
+    fig rm
