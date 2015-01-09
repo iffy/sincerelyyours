@@ -15,10 +15,14 @@ installing docker then install [fig](http://www.fig.sh/) like this:
 
     pip install fig
 
-Start the site with:
+Start afresh with:
 
-    fig up
+    fig rm --force && fig up db
 
-Restart with
+Press Control-C then:
+
+    fig build && fig up
+
+Restart with:
 
     fig build && fig up

@@ -1,3 +1,10 @@
+db:
+  image: mysql
+  environment:
+    - MYSQL_ROOT_PASSWORD=mysecretpassword
+    - MYSQL_USER=web
+    - MYSQL_PASSWORD=password
+    - MYSQL_DATABASE=normaldb
 web:
   build: .
   links:
@@ -5,14 +12,9 @@ web:
   ports:
     - "9000:80"
   environment:
-    - MYSQL_ROOT_PASSWORD="mysecretpassword"
-    - MYSQL_USER="web"
-    - MYSQL_PASSWORD="password"
-    - MYSQL_DATABASE="normaldb"
-db:
-  image: mysql
-  environment:
-    - MYSQL_ROOT_PASSWORD="mysecretpassword"
-    - MYSQL_USER="web"
-    - MYSQL_PASSWORD="password"
-    - MYSQL_DATABASE="normaldb"
+    - MYSQL_ROOT_PASSWORD=mysecretpassword
+    - MYSQL_USER=web
+    - MYSQL_HOST=db
+    - MYSQL_PASSWORD=password
+    - MYSQL_DATABASE=normaldb
+    - MYSQL_PORT=3306
