@@ -42,7 +42,7 @@ table.bordered tr th, {height:400px; overflow-y:scroll}  table.bordered tr td { 
 .rw-sentence span{
     color: #1A446C;
     white-space: nowrap;
-    font-size: 1600%;
+    font-size: 160%;
     font-weight: normal;
 }
 
