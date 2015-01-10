@@ -4,12 +4,20 @@
     <link href="public/main.css" media="all" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <div id="header">    
-    <h2>
-      <br> 
-        My Stories Are 
-       <marquee  behavior="scroll" direction="left" scrollamount="3">funny weird necessary  important classy  humbling
-        </marquee> 
+    <div id="header">
+    <section class="rw-wrapper">
+    <h2 class="rw-sentence">
+        <span>My Stories Are</span>
+        <div class="rw-words rw-words-1">
+            <span>funny</span>
+            <span>weird</span>
+            <span>necessary</span>
+            <span>important</span>
+            <span>classy</span>
+            <span>humbling</span>
+        </div>
+        <br />
     </h2>
+	</section>
 	</div>
     <div id="main">
