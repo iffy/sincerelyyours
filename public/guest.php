@@ -24,8 +24,10 @@ class Guest extends DatabaseObject {
   
 public static function find_by_name($name) {
 		global $database;
-		$sql = ("select * from " .self::$table_name. " where name = {$name} ");		
-		return $result_set = $database->query($sql);
+		$sanitized_name = $database->escape_value($name);
+		$sql = ("select * from " .self::$table_name. " where username = '{$sanitized_name}' ");		
+		$result_set = $database->query($sql);
+		return $result_set;
   }  
   
   public static function find_by_id($id=0) {
