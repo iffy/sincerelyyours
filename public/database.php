@@ -1,6 +1,16 @@
 <?php
 require_once("public/config.php");
 
+function updateSchema() {
+    $db = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME, DB_PORT);
+    $sql = file_get_contents('config/schema.sql');
+    if (!$sql) {
+        die("Error opening schema patch file");
+    }
+    mysqli_multi_query($db, $sql);
+    mysqli_close($db);
+}
+
 class MySQLDatabase {
 	
 	private $connection;

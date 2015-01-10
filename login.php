@@ -6,7 +6,7 @@ if($session->is_logged_in()) {
 }
 
 // Remember to give your form's submit tag a name="submit" attribute!
-if (isset($_POST['submit'])) { // Form has been submitted.
+if ($_SERVER['REQUEST_METHOD'] === "POST") { // Form has been submitted.
 
   $username = trim($_POST['username']);
   $password = trim($_POST['password']);
@@ -15,8 +15,9 @@ if (isset($_POST['submit'])) { // Form has been submitted.
 	
   $found_user = User::authenticate($username, $password);
   //$found_user = $user->authenticate($username, $password);
- 			
+
   if ($found_user) {
+    error_log('true found_user:' . print_r($found_user, true));
     $session->login($found_user);
     redirect_to("index.php");
   } else {

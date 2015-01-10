@@ -7,6 +7,8 @@ db:
     - MYSQL_DATABASE=normaldb
 web:
   build: .
+  volumes:
+    - .:/var/www/html:ro
   links:
     - db
   ports:

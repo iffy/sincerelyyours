@@ -19,13 +19,18 @@ Start afresh and make a new database:
 
     fig rm --force && fig up db
 
-Press Control-C then bring up the database:
+Press Control-C when it's done, then bring up the database in the background:
 
     fig start db
 
 Start/restart the web app:
 
     fig build && fig up web
+
+Populate the database with empty schema (I can't figure out a better way to do
+this yet):
+
+    curl http://127.0.0.1:9000/admin_loadschema.php
 
 Stop everything:
 

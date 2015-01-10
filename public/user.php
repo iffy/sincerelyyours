@@ -25,8 +25,8 @@ class User extends DatabaseObject {
 
 	public static function authenticate($username="", $password="") {
     global $database;
-    $username = $database->escape_value($username);
-    $password = $database->escape_value($password);
+    $username = $database->escape_value(trim($username));
+    $password = $database->escape_value(sha1($password));
 
     $sql  = "SELECT * FROM auth ";
     $sql .= "WHERE username = '{$username}' ";
@@ -34,6 +34,7 @@ class User extends DatabaseObject {
     $sql .= "LIMIT 1";
     
     $result_array = self::find_by_sql($sql);
+    	error_log("result: " . print_r($result_array, true));
 	 return !empty($result_array) ? array_shift($result_array) : false;
 	}
 
@@ -101,7 +102,11 @@ class User extends DatabaseObject {
 	  // sanitize the values before submitting
 	  // Note: does not alter the actual value of each attribute
 	  foreach($this->attributes() as $key => $value){
-	    $clean_attributes[$key] = $database->escape_value($value);
+	  	if ($key === "id") {
+	  		// skip id
+	  	} else {
+	  		$clean_attributes[$key] = $database->escape_value($value);	
+	  	}
 	  }
 	  return $clean_attributes;
 	}
@@ -123,8 +128,11 @@ class User extends DatabaseObject {
 	  $sql .= ") VALUES ('";
 		$sql .= join("', '", array_values($attributes));
 		$sql .= "')";
+      echo "sql: ".$sql;
 	  if($database->query($sql)) {
+	  	error_log("query succeeded");
 	    $this->id = $database->insert_id();
+	    error_log("insert id:" . $this->id);
 	    return true;
 	  } else {
 	    return false;
