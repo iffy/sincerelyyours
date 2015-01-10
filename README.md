@@ -25,7 +25,7 @@ Press Control-C when it's done, then bring up the database in the background:
 
 Start/restart the web app:
 
-    fig build && fig up web
+    fig build web && fig up web
 
 Populate the database with empty schema (I can't figure out a better way to do
 this yet):

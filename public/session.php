@@ -28,13 +28,9 @@ class Session {
 
 	public function login($user) {
     // database should find user based on username/password
-    error_log("login");
-    error_log(print_r($user));
     if($user->id){
-      error_log("setting session user id");
       $this->user_id = $_SESSION['user_id'] = $user->id;
       $this->logged_in = true;
-      error_log("_SESSION:" . print_r($_SESSION, true));
     }
   }
   

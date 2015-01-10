@@ -34,8 +34,7 @@ class User extends DatabaseObject {
     $sql .= "LIMIT 1";
     
     $result_array = self::find_by_sql($sql);
-    	error_log("result: " . print_r($result_array, true));
-	 return !empty($result_array) ? array_shift($result_array) : false;
+	 	return !empty($result_array) ? array_shift($result_array) : false;
 	}
 
 	// Common Database Methods
@@ -103,7 +102,8 @@ class User extends DatabaseObject {
 	  // Note: does not alter the actual value of each attribute
 	  foreach($this->attributes() as $key => $value){
 	  	if ($key === "id") {
-	  		// skip id
+	  		// skip id because it's the primary key, and we don't want to
+	  		// update it.
 	  	} else {
 	  		$clean_attributes[$key] = $database->escape_value($value);	
 	  	}
@@ -128,11 +128,8 @@ class User extends DatabaseObject {
 	  $sql .= ") VALUES ('";
 		$sql .= join("', '", array_values($attributes));
 		$sql .= "')";
-      echo "sql: ".$sql;
 	  if($database->query($sql)) {
-	  	error_log("query succeeded");
 	    $this->id = $database->insert_id();
-	    error_log("insert id:" . $this->id);
 	    return true;
 	  } else {
 	    return false;

@@ -17,7 +17,6 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") { // Form has been submitted.
   //$found_user = $user->authenticate($username, $password);
 
   if ($found_user) {
-    error_log('true found_user:' . print_r($found_user, true));
     $session->login($found_user);
     redirect_to("index.php");
   } else {
