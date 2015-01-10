@@ -17,7 +17,6 @@
             <span>humbling</span>
         </div>
         <br />
-        
     </h2>
 	</section>
 	</div>
