@@ -10,13 +10,14 @@ if (!$session->is_logged_in()) { redirect_to("index.php"); }
 	$authlast = $auth_user->lastname;
 
 	$guest = new Guest ();
-	$authguest = $guest::find_by_name($authusername);              //not working
-	$authguestusernames = $authguest->username;
-	$authguestemail = $authguest->email;
-	$authguestfirstname = $authguest->firstname;
-	$authguestlastname = $authguest->lastname;
-	$authguestrelation = $authguest->relation;
-
+	$auth_guest = $guest::find_by_name($authusername);              //not working
+	$authguestusernames = $auth_guest->username;
+	$authguestemail = $auth_guest->email;
+	$authguestfirstname = $auth_guest->firstname;
+	$authguestlastname = $auth_guest->lastname;
+	$authguestrelation = $auth_guest->relation;
+	
+	
 // Remember to give your form's submit tag a name="submit" attribute!
 if (isset($_POST['submit'])) { // Form has been submitted.
 	
