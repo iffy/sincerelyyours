@@ -23,7 +23,8 @@ class Story extends DatabaseObject {
   
 public static function find_by_name($name) {
 		global $database;
-		$sql = ("select * from " .self::$table_name. " where name = {$name} ");		
+		$sanitized_name = $database->escape_value($name);
+		$sql = ("select * from " .self::$table_name. " where name = '{$sanitized_name}' ");		
 		return $result_set = $database->query($sql);
   }  
   
