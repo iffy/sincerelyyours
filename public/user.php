@@ -25,8 +25,8 @@ class User extends DatabaseObject {
 
 	public static function authenticate($username="", $password="") {
     global $database;
-    $username = $database->escape_value($username);
-    $password = $database->escape_value($password);
+    $username = $database->escape_value(trim($username));
+    $password = $database->escape_value(sha1($password));
 
     $sql  = "SELECT * FROM auth ";
     $sql .= "WHERE username = '{$username}' ";
@@ -34,7 +34,7 @@ class User extends DatabaseObject {
     $sql .= "LIMIT 1";
     
     $result_array = self::find_by_sql($sql);
-	 return !empty($result_array) ? array_shift($result_array) : false;
+	 	return !empty($result_array) ? array_shift($result_array) : false;
 	}
 
 	// Common Database Methods
@@ -101,7 +101,12 @@ class User extends DatabaseObject {
 	  // sanitize the values before submitting
 	  // Note: does not alter the actual value of each attribute
 	  foreach($this->attributes() as $key => $value){
-	    $clean_attributes[$key] = $database->escape_value($value);
+	  	if ($key === "id") {
+	  		// skip id because it's the primary key, and we don't want to
+	  		// update it.
+	  	} else {
+	  		$clean_attributes[$key] = $database->escape_value($value);	
+	  	}
 	  }
 	  return $clean_attributes;
 	}

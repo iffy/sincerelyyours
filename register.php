@@ -11,7 +11,7 @@ if (isset($_POST['submit'])) { // Form has been submitted.
 	
 	$user = new User();
   	$user->username = trim($_POST['username']);
-  	$user->password = sha1(trim($_POST['password']));
+  	$user->password = sha1($_POST['password']);
   	$user->email = trim($_POST['email']);
   	$user->firstname = trim($_POST['firstname']);
   	$user->lastname = trim($_POST['lastname']);

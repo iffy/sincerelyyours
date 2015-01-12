@@ -6,3 +6,36 @@ Public is where the Class files are being held as well as the CSS and header and
 
 All the other files are currently in the root directory. Although we will be be keeping track of images in the database,
 we will not be tracking them in the repository.
+
+
+## Running with docker ##
+
+You can get a [docker](https://www.docker.com/) version of this running by
+installing docker then install [fig](http://www.fig.sh/) like this:
+
+    pip install fig
+
+Start afresh and make a new database:
+
+    fig rm --force && fig up db
+
+Press Control-C when it's done, then bring up the database in the background:
+
+    fig start db
+
+Start/restart the web app:
+
+    fig build web && fig up web
+
+Populate the database with empty schema (I can't figure out a better way to do
+this yet):
+
+    curl http://127.0.0.1:9000/admin_loadschema.php
+
+Stop everything:
+
+    fig stop
+
+Destroy everything:
+    
+    fig rm

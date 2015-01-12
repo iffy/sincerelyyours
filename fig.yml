@@ -1,0 +1,22 @@
+db:
+  image: mysql
+  environment:
+    - MYSQL_ROOT_PASSWORD=mysecretpassword
+    - MYSQL_USER=web
+    - MYSQL_PASSWORD=password
+    - MYSQL_DATABASE=normaldb
+web:
+  build: .
+  volumes:
+    - .:/var/www/html:ro
+  links:
+    - db
+  ports:
+    - "9000:80"
+  environment:
+    - MYSQL_ROOT_PASSWORD=mysecretpassword
+    - MYSQL_USER=web
+    - MYSQL_HOST=db
+    - MYSQL_PASSWORD=password
+    - MYSQL_DATABASE=normaldb
+    - MYSQL_PORT=3306
