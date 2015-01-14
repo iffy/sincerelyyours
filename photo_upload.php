@@ -15,7 +15,7 @@ if (!$session->is_logged_in()) { redirect_to("index.php"); }
 	$authusername = $auth_user->username;
 	$authfirst = $auth_user->firstname;
 	$authlast = $auth_user->lastname;	
-	
+	error_log($authusername);
 	$photo = new Photograph();
 			 	 	
 	$storys = Story::find_by_name($authusername);	
@@ -47,33 +47,17 @@ if (!$session->is_logged_in()) { redirect_to("index.php"); }
 
 <?php echo "<h2>".$authfirst." ".$authlast." upload your photos</h2> <br><br>"; ?>
 
-	<?php	
-			$photostorys = $storys;
-			$photostorysname = $photostory->name;
-			$photostorystoryname = $photostorys->storyname;
-						
-			
-			if($authusername == $photostoryname) {
-			error_log($photostoryname." ---1");
-			error_log($authusername."----2");
-			$storyname = $story->storyname;
-			error_log($photostorystoryname."-----3");
-	?>
-	 
+		 
 	<?php echo output_message($message); ?>
  
   <form action="photo_upload.php" enctype="multipart/form-data" method="POST">
     <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max_file_size; ?>" />
     <p><input type="file" name="file_upload" /></p>
-    <p><select name="storyname"><option value=" <?php echo $photostorystoryname; ?> "></option></select></p>
+    <p><select name="storyname"><option value=" <?php echo $storyname; ?> "></option></select></p>
     <p>Picture Date: <input type="text" name="picdate" value="" /></p>
     <input type="submit" name="submit" value="Upload" />
   </form>
   
- <?php  
- 		}
- 		
- ?>
  
 <?php include('public/footer.php'); ?>
 		
