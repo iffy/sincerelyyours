@@ -12,24 +12,25 @@
 <table class="bordered">
   <tr>
     <th>Image</th>
-    <th>ID</th>
+    <th>Story ID</th>
     <th>Story Name</th>
     <th>Image Name</th>
     <th>Date</th>
     <th>Size</th>
     <th>Type</th>
-		<th>&nbsp;</th>
+	 <th>&nbsp;</th>
   </tr>
-<?php foreach($photos as $photo): //foreach not working with option/select below ?>
+<?php foreach($photos as $photo):  ?>
   <tr>
     <td><img src="../<?php echo $photo->image_path(); ?>" width="100" /></td>
+	 <td><?php echo $photo->image_id; ?></td>    
     <td><?php echo $photo->storyname; ?></td>
-    <td><?php echo $photo->image_id; ?></td>
 	 <td><?php echo $photo->image_name; ?></td>
     <td><?php echo $photo->submission_date; ?></td>
     <td><?php echo $photo->size_as_text(); ?></td>
     <td><?php echo $photo->type; ?></td>
-		<td><a href="delete_photo.php?id=<?php echo $photo->image_id; ?>">Delete</a></td>  <?php // delete not working ?>
+	 <td><a href="delete_photo.php?id=<?php echo $photo->image_id; ?>">Delete</a></td>  <?php // delete not working ?>
+  </tr>
 <?php endforeach; ?>
 </table>
 <br />
