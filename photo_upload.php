@@ -20,7 +20,7 @@ if (!$session->is_logged_in()) { redirect_to("index.php"); }
 			 	 	
 	$storys = Story::find_by_name($authusername);	
 		foreach($storys as $story):
-		$story_storynames = $story->storyname;	
+		
 		
 	if(isset($_POST['submit'])) {
 				
@@ -54,7 +54,7 @@ if (!$session->is_logged_in()) { redirect_to("index.php"); }
   <form action="photo_upload.php" enctype="multipart/form-data" method="POST">
     <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max_file_size; ?>" />
     <p><input type="file" name="file_upload" /></p>
-    <p><?php while($authusername =! null) { ?><select name="storyname"><option value=" <?php echo $story_storynames; } ?> "></option></select></p>
+    <p><?php if($authusername =! null) { ?><select name="storyname"><option value=" <?php echo $story->storyname ; } ?> "></option></select></p>
     <p>Picture Date: <input type="text" name="picdate" value="" /></p>
     <input type="submit" name="submit" value="Upload" />
   </form>
