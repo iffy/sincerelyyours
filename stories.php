@@ -37,14 +37,13 @@ if (!$session->is_logged_in()) { redirect_to("login.php"); }
 <?php foreach($storys as $story): 
 	if($story->name == $authusername) {
 	$substringstories = substr($story->stories,0,300);
-	$storystoryname = $story->storyname;
-	
+		
 	$photos = $storystoryname;
 ?>
   <tr>
-    <td width="5%" ><a href="<?php Story::find_by_id($story->id); ?>"><?php echo $story->id; ?></a></td> 
+    <td width="5%" ><a href="showstory.php?id=<?php echo $story->id; ?>"><?php echo $story->id; ?></a></td> 
     <td width="5%" ><?php echo $story->name; ?></td>
-    <td width="10%" ><?php echo $storystoryname; ?></td>
+    <td width="10%" ><?php echo $story->storyname; ?></td>
     <td width="30%" ><?php echo $substringstories; ?> ...</td>
     <td width="10%" ><?php echo $story->date; ?></td>
     <td width="5%"><img src="images/<?php echo $photos; ?>" width="100" /></td>
