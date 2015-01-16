@@ -88,7 +88,11 @@ public static function find_by_name($name) {
 	  // sanitize the values before submitting
 	  // Note: does not alter the actual value of each attribute
 	  foreach($this->attributes() as $key => $value){
-	    $clean_attributes[$key] = $database->escape_value($value);
+	  	if ($key === "id") {
+	  		// skip id because it's the primary key
+	  	} else {
+	  		$clean_attributes[$key] = $database->escape_value($value);	
+	  	}
 	  }
 	  return $clean_attributes;
 	}

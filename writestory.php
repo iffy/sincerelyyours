@@ -8,8 +8,8 @@ if (!$session->is_logged_in()) { redirect_to("index.php"); }
 	$authusername = $auth_user->username;
 	$authfirst = $auth_user->firstname;
 	$authlast = $auth_user->lastname;
-	error_log($authusername);
 
+<<<<<<< HEAD
 	$guests = new Guest ();
 	foreach($guests as $guest):
 	$auth_guest = $guests->find_by_name($authusername);              //not working
@@ -19,6 +19,13 @@ if (!$session->is_logged_in()) { redirect_to("index.php"); }
 	$authguestlastname = $guests->lastname;
 	$authguestrelation = $guests->relation;
 	
+=======
+	// Get a list of guests for this user
+	$sanitized_username = $database->escape_value($authusername);
+	$result = $database->query("select * from tbl_guests where username= '{$sanitized_username}'");
+	$guests = $database->fetch_all($result);
+
+>>>>>>> 6ae3f1840e0289f2cd20948ec6ac842431ff694f
 	
 // Remember to give your form's submit tag a name="submit" attribute!
 if (isset($_POST['submit'])) { // Form has been submitted.
@@ -78,8 +85,18 @@ if (isset($_POST['submit'])) { // Form has been submitted.
 		      </td>
 		    </tr>
 		    <tr>
+<<<<<<< HEAD
 		      <td colspan="2">
 		        <div><?php if($authusername != null) { ?><input name="checkbox[]" type= "checkbox" id="checkbox[]" value "<?php  $authguestemail; ?>"><?php $authguestfirstname; }?></div>
+=======
+		      <td>Guests:</td>
+		      <td>
+		      	<?php foreach ($guests as $guest) { ?>
+			      	<div>
+			      		<input type="checkbox" name="guests[]" value="<?=htmlentities($guest['id'])?>"> <?=htmlentities($guest['firstname'])." ".htmlentities($guest['lastname'])?>
+			      	</div>
+		        <?php } ?>
+>>>>>>> 6ae3f1840e0289f2cd20948ec6ac842431ff694f
 		      </td>
 		    </tr>
 		    <tr>
@@ -89,8 +106,12 @@ if (isset($_POST['submit'])) { // Form has been submitted.
 		      </td>
 		    </tr>
 		  </table>
+<<<<<<< HEAD
 		</form>		
 <?php endforeach ;?>
+=======
+		</form>
+>>>>>>> 6ae3f1840e0289f2cd20948ec6ac842431ff694f
 
 <?php include 'public/footer.php'; ?>
 
