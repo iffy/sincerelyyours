@@ -12,14 +12,13 @@ if (!$session->is_logged_in()) { redirect_to("index.php"); }
 
 	$guests = new Guest ();
 	foreach($guests as $guest):
-	$auth_guest = $guest->find_by_name($authusername);              //not working
-	$authguestusername = $guest->username;
-	$authguestemail = $guest->email;
-	$authguestfirstname = $guest->firstname;
-	$authguestlastname = $guest->lastname;
-	$authguestrelation = $guest->relation;
-	error_log($auth_guest);
-	error_log($authguestusername);
+	$auth_guest = $guests->find_by_name($authusername);              //not working
+	$authguestusername = $guests->username;
+	$authguestemail = $guests->email;
+	$authguestfirstname = $guests->firstname;
+	$authguestlastname = $guests->lastname;
+	$authguestrelation = $guests->relation;
+	
 	
 // Remember to give your form's submit tag a name="submit" attribute!
 if (isset($_POST['submit'])) { // Form has been submitted.
@@ -80,7 +79,7 @@ if (isset($_POST['submit'])) { // Form has been submitted.
 		    </tr>
 		    <tr>
 		      <td colspan="2">
-		        <div><?php while($authusername == $authguestusername) { ?><input name="checkbox[]" type= "checkbox" id="checkbox[]" value "<?php  $authguestemail; ?>"><?php $authguestfirstname; }?></div>
+		        <div><?php if($authusername != null) { ?><input name="checkbox[]" type= "checkbox" id="checkbox[]" value "<?php  $authguestemail; ?>"><?php $authguestfirstname; }?></div>
 		      </td>
 		    </tr>
 		    <tr>
@@ -91,7 +90,7 @@ if (isset($_POST['submit'])) { // Form has been submitted.
 		    </tr>
 		  </table>
 		</form>		
-<?php endforeach ?>
+<?php endforeach ;?>
 
 <?php include 'public/footer.php'; ?>
 
