@@ -9,23 +9,23 @@ if (!$session->is_logged_in()) { redirect_to("index.php"); }
 	$authfirst = $auth_user->firstname;
 	$authlast = $auth_user->lastname;
 
-<<<<<<< HEAD
-	$guests = new Guest ();
-	foreach($guests as $guest):
-	$auth_guest = $guests->find_by_name($authusername);              //not working
-	$authguestusername = $guests->username;
-	$authguestemail = $guests->email;
-	$authguestfirstname = $guests->firstname;
-	$authguestlastname = $guests->lastname;
-	$authguestrelation = $guests->relation;
-	
-=======
-	// Get a list of guests for this user
+	// Get a list of guests for this user - fetch_all is not compiled in this version
+	//$sanitized_username = $database->escape_value($authusername);
+	//$result = $database->query("select * from tbl_guests where username= '{$sanitized_username}'");
+	//$guests = $database->fetch_all($result);
 	$sanitized_username = $database->escape_value($authusername);
-	$result = $database->query("select * from tbl_guests where username= '{$sanitized_username}'");
-	$guests = $database->fetch_all($result);
-
->>>>>>> 6ae3f1840e0289f2cd20948ec6ac842431ff694f
+	$sql = "select * from tbl_guests where username= '{$sanitized_username}'";
+	//database connection is already made and called $db
+   $result = $db -> query($sql);
+	if (!$result) {
+		echo"Cannot run query";
+	  echo mysqli_error($db);
+		exit;
+		}
+	$guest = mysqli_fetch_assoc($result);
+	
+	
+	
 	
 // Remember to give your form's submit tag a name="submit" attribute!
 if (isset($_POST['submit'])) { // Form has been submitted.
@@ -33,8 +33,9 @@ if (isset($_POST['submit'])) { // Form has been submitted.
 	$story = new Story();
   	$story->name = $authusername;
   	$story->storyname = trim($_POST['storyname']);
-  	$story->stories = trim($_POST['stories']);
+  	$story->stories = htmlentities($_POST['stories']);
   	$story->date = trim($_POST['date']);
+	$story->guest_id = trim($_POST['guests']);	
 	
 	if($story->save()) {
 			// Success
@@ -60,16 +61,12 @@ if (isset($_POST['submit'])) { // Form has been submitted.
 		<?php echo output_message($message); ?>
 		<form action="writestory.php" enctype="multipart/form-data" method="post">
 		  <table>
-		    <tr>
-		      <td>Username:</td>
-		      <td>
-			<input type="text" name="name" value="<?php echo $authusername; ?>" />
-		      </td>
-		    </tr>
-		    <tr>
+		   <tr>
 		      <td>Story Name:</td>
 		      <td>
 		        <input type="text" name="storyname" maxlength="40" value="<?php echo htmlentities($storyname); ?>" />
+		      </td>
+		      <td>
 		      </td>
 		    </tr>
 		    <tr>
@@ -77,41 +74,36 @@ if (isset($_POST['submit'])) { // Form has been submitted.
 		      <td>
 		        <input type="text" name="date" maxlength="40" value="<?php echo htmlentities($date); ?>" />
 		      </td>
+		      <td>
+		      Guests:
+		      </td>
 		    </tr>
 		    <tr>
 		      <td>Write Story:</td>
 		      <td>
-		        <textarea spellcheck="true" Name ="stories" rows="20" cols="70"></textarea>
+		        <textarea spellcheck="true" Name ="$stories" rows="20" cols="70"></textarea>
 		      </td>
-		    </tr>
-		    <tr>
-<<<<<<< HEAD
-		      <td colspan="2">
-		        <div><?php if($authusername != null) { ?><input name="checkbox[]" type= "checkbox" id="checkbox[]" value "<?php  $authguestemail; ?>"><?php $authguestfirstname; }?></div>
-=======
-		      <td>Guests:</td>
 		      <td>
-		      	<?php foreach ($guests as $guest) { ?>
-			      	<div>
-			      		<input type="checkbox" name="guests[]" value="<?=htmlentities($guest['id'])?>"> <?=htmlentities($guest['firstname'])." ".htmlentities($guest['lastname'])?>
-			      	</div>
-		        <?php } ?>
->>>>>>> 6ae3f1840e0289f2cd20948ec6ac842431ff694f
+		      <?php while ($guest = mysqli_fetch_assoc($result)) { ?>
+		      <input type="checkbox" name="guests[]" value="<?=htmlentities($guest['id'])?>"> <?=htmlentities($guest['firstname'])." ".htmlentities($guest['lastname'])?>
+				<?php } ?>
+		      </td>
+		    </tr>
+		    <tr>
+		      <td>
+		      </td>
+		      <td>
 		      </td>
 		    </tr>
 		    <tr>
 		      <td colspan="2">
+		      </td>
 		      <td>
 		        <input type="submit" name="submit" value="Save Story" />
 		      </td>
 		    </tr>
 		  </table>
-<<<<<<< HEAD
-		</form>		
-<?php endforeach ;?>
-=======
 		</form>
->>>>>>> 6ae3f1840e0289f2cd20948ec6ac842431ff694f
 
 <?php include 'public/footer.php'; ?>
 
