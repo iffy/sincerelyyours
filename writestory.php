@@ -14,7 +14,7 @@ if (!$session->is_logged_in()) { redirect_to("index.php"); }
 	//$result = $database->query("select * from tbl_guests where username= '{$sanitized_username}'");
 	//$guests = $database->fetch_all($result);
 	$sanitized_username = $database->escape_value($authusername);
-	$sql = "select * from tbl_guests where username= '{$sanitized_username}'";
+	$sql = "select * from tbl_guests where username = '{$sanitized_username}'";
 	//database connection is already made and called $db
    $result = $db -> query($sql);
 	if (!$result) {
@@ -23,7 +23,6 @@ if (!$session->is_logged_in()) { redirect_to("index.php"); }
 		exit;
 		}
 	$guest = mysqli_fetch_assoc($result);
-	
 	
 	
 	
@@ -84,15 +83,11 @@ if (isset($_POST['submit'])) { // Form has been submitted.
 		        <textarea spellcheck="true" Name ="$stories" rows="20" cols="70"></textarea>
 		      </td>
 		      <td>
-		      <?php while ($guest = mysqli_fetch_assoc($result)) { ?>
-		      <input type="checkbox" name="guests[]" value="<?=htmlentities($guest['id'])?>"> <?=htmlentities($guest['firstname'])." ".htmlentities($guest['lastname'])?>
-				<?php } ?>
+		      <input type="checkbox" name="guests" <?php while ($guest = mysqli_fetch_assoc($result)) { echo "value='".htmlentities($guest['id'])."'>"; echo htmlentities($guest['firstname'])." ".htmlentities($guest['lastname']);}?>
 		      </td>
 		    </tr>
 		    <tr>
-		      <td>
-		      </td>
-		      <td>
+		      <td colspan="3">
 		      </td>
 		    </tr>
 		    <tr>
