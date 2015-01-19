@@ -16,8 +16,7 @@ if (!$session->is_logged_in()) { redirect_to("login.php"); }
 <?php	
 // Find story by id
   $story = Story::find_by_id($id);	
-  error_log($id);  
-  ?>
+    ?>
 
 <?php include('public/header.php'); ?>  
 

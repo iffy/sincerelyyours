@@ -34,7 +34,7 @@ if (isset($_POST['submit'])) { // Form has been submitted.
   	$story->storyname = trim($_POST['storyname']);
   	$story->stories = htmlentities($_POST['stories']);
   	$story->date = trim($_POST['date']);
-	$story->guest_id = trim($_POST['guests']);	
+	$story->guest_id =($_POST['guest']);	
 	
 	if($story->save()) {
 			// Success
@@ -80,12 +80,12 @@ if (isset($_POST['submit'])) { // Form has been submitted.
 		    <tr>
 		      <td>Write Story:</td>
 		      <td>
-		        <textarea spellcheck="true" Name ="$stories" rows="20" cols="70"></textarea>
+		        <textarea spellcheck="true" Name ="stories" rows="20" cols="70"></textarea>
 		      </td>
 		      <td>
 		      <?php while ($guest = mysqli_fetch_assoc($result)) { 
-		      	echo "<input type='checkbox' name='guest' 'value='".htmlentities($guest['id'])."'>"; 
-		      	echo htmlentities($guest['firstname'])." ".htmlentities($guest['lastname'])."<br>";}?>
+		      	echo "<input type='checkbox' name='guest' 'value='". htmlentities($guest['id']).","."'>"; 
+		      	echo htmlentities($guest['firstname'])." ". htmlentities($guest['lastname'])."<br>";}?>
 		      </td>
 		    </tr>
 		    <tr>
