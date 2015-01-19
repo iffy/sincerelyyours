@@ -22,7 +22,7 @@ if (!$session->is_logged_in()) { redirect_to("index.php"); }
 	  echo mysqli_error($db);
 		exit;
 		}
-	$guest = mysqli_fetch_assoc($result);
+	//$guest = mysqli_fetch_assoc($result);
 	
 	
 	
@@ -83,7 +83,9 @@ if (isset($_POST['submit'])) { // Form has been submitted.
 		        <textarea spellcheck="true" Name ="$stories" rows="20" cols="70"></textarea>
 		      </td>
 		      <td>
-		      <input type="checkbox" name="guests" <?php while ($guest = mysqli_fetch_assoc($result)) { echo "value='".htmlentities($guest['id'])."'>"; echo htmlentities($guest['firstname'])." ".htmlentities($guest['lastname']);}?>
+		      <?php while ($guest = mysqli_fetch_assoc($result)) { 
+		      	echo "<input type='checkbox' name='guest' 'value='".htmlentities($guest['id'])."'>"; 
+		      	echo htmlentities($guest['firstname'])." ".htmlentities($guest['lastname'])."<br>";}?>
 		      </td>
 		    </tr>
 		    <tr>
