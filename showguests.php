@@ -30,13 +30,14 @@ if (!$session->is_logged_in()) { redirect_to("login.php"); }
 
 <?php include('public/header.php'); ?>  
 
-<?php echo "<h2>".$authfirst." ".$authlast." your story</h2> <br><br>" ?>
+<?php echo "<h2>".$authfirst." ".$authlast." your guests</h2> <br><br>" ?>
 
 <a href="create_guests.php">Create Guests</a><br><br><br>
 <table>
 <?php while($guest = mysqli_fetch_assoc($result)) { ?>
 	 <?php echo "<tr><td>". $guest['firstname']." ".$guest['lastname']."<br>";
 			echo $guest['email']."<br>";
-			echo $guest['relation']."<br><br><hr></td></tr>"; }?>
+			echo $guest['relation']."<br>";
+			echo "<a href='edit_guests.php?id=".$guest['id']."'>edit</a> <a href='delete_guest.php'>delete</a> <br><hr></td></tr>"; }?>
  </table> 
   <?php include('public/footer.php'); ?>
