@@ -2,7 +2,7 @@
     <a href="stories.php">Stories</a> 
     <a href="photo_upload.php">Upload Photo</a> 
     <a href="list_photos.php">See Photos</a>
-    <a href="create_guests.php">Create Guest</a>
+    <a href="showguests.php">Show Guest</a>
     <a href="logout.php">Logout</a> </h3>
     </div>
     
