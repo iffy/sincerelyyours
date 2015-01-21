@@ -26,13 +26,19 @@ if (!$session->is_logged_in()) { redirect_to("login.php"); }
 <a href="writestory.php">Write Story</a><br><br>
   <table width = 60%>
   <tr>
-  <td><?php echo $story->storyname; ?> </td> 
+  <td><?php echo $story->storyname; ?> </td><td></td> 
   </tr>  
   <tr>
-  <td>&nbsp; </td> 
+  <td>&nbsp; </td><td></td> 
   </tr>
   <tr>  
-  <td><?php echo $story->stories; ?> </td>
+  <td><?php echo $story->stories; ?> </td><td></td>
+  </tr>
+  <tr>
+  <td>&nbsp; </td><td></td> 
+  </tr>
+  <tr>
+  <td><a href="edit_story.php?id=<?php echo $story->id; ?>">edit</a> delete</td><td></td> 
   </tr>
   </table>
   

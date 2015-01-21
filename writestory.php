@@ -22,7 +22,7 @@ if (!$session->is_logged_in()) { redirect_to("index.php"); }
 	  echo mysqli_error($db);
 		exit;
 		}
-	//$guest = mysqli_fetch_assoc($result);
+	
 	
 	
 	
