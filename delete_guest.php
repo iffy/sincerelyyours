@@ -10,18 +10,15 @@ if (!$session->is_logged_in()) { redirect_to("login.php"); }
 	error_log($id);
 
 
-if($id != null) {
-function open_connection()
-{$sql = "DELETE FROM tlb_guest WHERE id = {$id} LIMIT 1";}
-$result =mysqli_query($db, $sql);
 
-	if($result && mysqli_affected_rows($db) == 1){
+$sql = "DELETE FROM tlb_guest WHERE id = {'$id'} LIMIT 1";
+$database->query($sql);
+	  if ($database->affected_rows() == 1) {
+
 		redirect_to("showguests.php");}else {
 		echo"Cannot run query";
-		}
-	}else {
- 	error_log($id);
- 	}	
+ 		error_log($id);
+ 		}	
  
 ?>
 <?php if(isset($database)) { $database->close_connection(); } ?>

@@ -260,7 +260,7 @@ class Photograph extends DatabaseObject {
 		// - DELETE FROM table WHERE condition LIMIT 1
 		// - escape all values to prevent SQL injection
 		// - use LIMIT 1
-	  $sql = ( "DELETE FROM ".self::$table_name . " WHERE id=". $database->escape_value($this->image_id). " LIMIT 1");
+	  $sql = ( "DELETE FROM ".self::$table_name . " WHERE image_id=". $database->escape_value($this->image_id). " LIMIT 1");
 	  $database->query($sql);
 	  return ($database->affected_rows() == 1) ? true : false;
 	
