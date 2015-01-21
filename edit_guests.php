@@ -11,7 +11,7 @@ if (!$session->is_logged_in()) { redirect_to("index.php"); }
 // Remember to give your form's submit tag a name="submit" attribute!
 
 	$id = $_GET['id'];
-	//error_log($id);
+	error_log($id);
 	?>
 
 <?php	
