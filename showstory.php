@@ -38,7 +38,7 @@ if (!$session->is_logged_in()) { redirect_to("login.php"); }
   <td>&nbsp; </td><td></td> 
   </tr>
   <tr>
-  <td><a href="edit_story.php?id=<?php echo $story->id; ?>">edit</a> delete</td><td></td> 
+  <td><a href="edit_story.php?id=<?php echo $story->id; ?>">edit</a> <a href="delete_story.php?id=<?php echo $story->id; ?>&name=<?php echo $authusername; ?>">delete</a></td><td></td> 
   </tr>
   </table>
   

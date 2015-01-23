@@ -38,6 +38,6 @@ if (!$session->is_logged_in()) { redirect_to("login.php"); }
 	 <?php echo "<tr><td>". $guest['firstname']." ".$guest['lastname']."<br>";
 			echo $guest['email']."<br>";
 			echo $guest['relation']."<br>";
-			echo "<a href='edit_guests.php?id=".$guest['id']."'>edit</a> <a href='delete_guest.php?=".$guest['id']."'>delete</a> <br><hr></td></tr>"; }?>
+			echo "<a href='edit_guests.php?id=".$guest['id']."'>edit</a> <a href='delete_guest.php?id=".$guest['id']."&name=".$authusername."'>delete</a> <br><hr></td></tr>"; }?>
  </table> 
   <?php include('public/footer.php'); ?>

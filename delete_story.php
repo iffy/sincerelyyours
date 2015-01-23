@@ -13,11 +13,11 @@ if (!$session->is_logged_in()) { redirect_to("login.php"); }
 
 if($name == $authusername) {
 
-$sql = "DELETE FROM tbl_guests WHERE id = '$id' LIMIT 1";
+$sql = "DELETE FROM tbl_story WHERE id = '$id' LIMIT 1";
 $result = $db->query($sql); 
 	  if ($result != null) {
 
-		redirect_to("showguests.php");}else {
+		redirect_to("stories.php");}else {
 		echo"Cannot run query";
  		}	
  }else {
