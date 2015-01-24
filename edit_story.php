@@ -11,6 +11,7 @@ if (!$session->is_logged_in()) { redirect_to("login.php"); }
 	$authlast = $auth_user->lastname;	
 	
 	$id = $_GET['id'];
+	error_log($id);
 	
 $sanitized_username = $database->escape_value($authusername);
 	$sql = "select * from tbl_guests where username = '{$sanitized_username}'";
@@ -27,6 +28,26 @@ $sanitized_username = $database->escape_value($authusername);
 <?php	
 // Find story by id
   $story = Story::find_by_id($id);	
+   
+// Remember to give your form's submit tag a name="submit" attribute!
+if (isset($_POST['submit'])) { // Form has been submitted.
+	error_log($story->id); //*****this does not show up and I lose the $_GET[$id] at this point also****
+	$story = new Story();
+  	$story->name = $authusername;
+  	$story->stories = htmlentities($_POST['stories']);
+  	$story->date = trim($_POST['date']);
+	$story->guest_id =($_POST['guest']);	
+	
+	//***********sql statement below does not work *********
+	$sql = "UPDATE tbl_story SET stories = $story->stories, date = $stories->date, guest_id = $story->guest->id WHERE id = $story->id ";
+	if (mysqli_query($db, $sql)) {
+    echo "Record updated successfully";
+    redirect_to("stories.php");
+} else {
+    echo "Error updating record: " . mysqli_error($db);
+}
+	
+	}else{   
     ?>
 
 <?php include('public/header.php'); ?>  
@@ -40,13 +61,13 @@ $sanitized_username = $database->escape_value($authusername);
 		   <tr>
 		      <td>Story Name:</td>
 		      <td>
-		        <input type="text" name="storyname" maxlength="40" value="<?php echo $story->storyname; ?>" />
+		       <h3>  <?php echo $story->storyname; ?></h3>
 		      </td>
 		      <td>
 		      </td>
 		    </tr>
 		    <tr>
-		      <td>Story Date:</td>
+		      <td>Edit Date:</td>
 		      <td>
 		        <input type="text" name="date" maxlength="40" value="<?php echo $story->date; ?>" />
 		      </td>
@@ -55,9 +76,9 @@ $sanitized_username = $database->escape_value($authusername);
 		      </td>
 		    </tr>
 		    <tr>
-		      <td>Write Story:</td>
+		      <td>Edit Story:</td>
 		      <td>
-		        <textarea spellcheck="true" Name ="stories" rows="20" cols="70"><?php echo $story->stories; ?></textarea>
+		        <textarea spellcheck="true" Name ="stories" rows="20" cols="75"><?php echo $story->stories; ?></textarea>
 		      </td>
 		      <td>
 		      <?php while ($guest = mysqli_fetch_assoc($result)) { 
@@ -78,5 +99,5 @@ $sanitized_username = $database->escape_value($authusername);
 		    </table>
 		</form>
   
-  
+  <?php }  ?>
   <?php include('public/footer.php'); ?>

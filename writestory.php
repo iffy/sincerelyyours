@@ -9,10 +9,7 @@ if (!$session->is_logged_in()) { redirect_to("index.php"); }
 	$authfirst = $auth_user->firstname;
 	$authlast = $auth_user->lastname;
 
-	// Get a list of guests for this user - fetch_all is not compiled in this version
-	//$sanitized_username = $database->escape_value($authusername);
-	//$result = $database->query("select * from tbl_guests where username= '{$sanitized_username}'");
-	//$guests = $database->fetch_all($result);
+	
 	$sanitized_username = $database->escape_value($authusername);
 	$sql = "select * from tbl_guests where username = '{$sanitized_username}'";
 	//database connection is already made and called $db
