@@ -11,7 +11,7 @@ if (!$session->is_logged_in()) { redirect_to("login.php"); }
 	$authlast = $auth_user->lastname;	
 	
 	$id = $_GET['id'];
-	error_log($id);
+	error_log($id."--1");
 	
 $sanitized_username = $database->escape_value($authusername);
 	$sql = "select * from tbl_guests where username = '{$sanitized_username}'";
@@ -28,10 +28,12 @@ $sanitized_username = $database->escape_value($authusername);
 <?php	
 // Find story by id
   $story = Story::find_by_id($id);	
-   
+  $id = $story->id;
+  error_log($id."--2");
+  
 // Remember to give your form's submit tag a name="submit" attribute!
 if (isset($_POST['submit'])) { // Form has been submitted.
-	error_log($story->id); //*****this does not show up and I lose the $_GET[$id] at this point also****
+	error_log($id."--3"); //*****this does not show up and I lose the $_GET[$id] at this point also nothing prints here, WHY?******
 	$story = new Story();
   	$story->name = $authusername;
   	$story->stories = htmlentities($_POST['stories']);
@@ -39,7 +41,7 @@ if (isset($_POST['submit'])) { // Form has been submitted.
 	$story->guest_id =($_POST['guest']);	
 	
 	//***********sql statement below does not work *********
-	$sql = "UPDATE tbl_story SET stories = $story->stories, date = $stories->date, guest_id = $story->guest->id WHERE id = $story->id ";
+	$sql = "UPDATE tbl_story SET stories = $story->stories, date = $stories->date, guest_id = $story->guest->id WHERE id = $id ";
 	if (mysqli_query($db, $sql)) {
     echo "Record updated successfully";
     redirect_to("stories.php");
