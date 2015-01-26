@@ -28,20 +28,20 @@ $sanitized_username = $database->escape_value($authusername);
 <?php	
 // Find story by id
   $story = Story::find_by_id($id);	
-  $id = $story->id;
-  error_log($id."--2");
-  
+   
 // Remember to give your form's submit tag a name="submit" attribute!
 if (isset($_POST['submit'])) { // Form has been submitted.
-	error_log($id."--3"); //*****this does not show up and I lose the $_GET[$id] at this point also nothing prints here, WHY?******
+	 //*****this does not show up and I lose the $_GET[$id] at this point also nothing prints here, WHY?******
 	$story = new Story();
-  	$story->name = $authusername;
-  	$story->stories = htmlentities($_POST['stories']);
-  	$story->date = trim($_POST['date']);
-	$story->guest_id =($_POST['guest']);	
+  	$name = $authusername;
+	$id = trim($_POST['id']);
+	error_log($id."--2");
+  	$stories = htmlentities($_POST['stories']);
+  	$date = trim($_POST['date']);
+	$guest_id =($_POST['guest']);	
 	
 	//***********sql statement below does not work *********
-	$sql = "UPDATE tbl_story SET stories = $story->stories, date = $stories->date, guest_id = $story->guest->id WHERE id = $id ";
+	$sql = "UPDATE tbl_story SET stories='$stories', date='$date', guest_id='$guest_id' WHERE id='$id' LIMIT 1";
 	if (mysqli_query($db, $sql)) {
     echo "Record updated successfully";
     redirect_to("stories.php");
@@ -60,6 +60,14 @@ if (isset($_POST['submit'])) { // Form has been submitted.
 		<?php echo output_message($message); ?>
 		<form action="edit_story.php" enctype="multipart/form-data" method="post">
 		  <table>
+		   <tr>
+		      <td></td>
+		      <td>
+		       <input type="hidden" name="id" maxlength="11" value="<?php echo $story->id; ?>" />
+		      </td>
+		      <td>
+		      </td>
+		    </tr>
 		   <tr>
 		      <td>Story Name:</td>
 		      <td>
