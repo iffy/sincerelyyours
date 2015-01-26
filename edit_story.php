@@ -32,7 +32,7 @@ $sanitized_username = $database->escape_value($authusername);
 // Remember to give your form's submit tag a name="submit" attribute!
 if (isset($_POST['submit'])) { // Form has been submitted.
 	 //*****this does not show up and I lose the $_GET[$id] at this point also nothing prints here, WHY?******
-	$story = new Story();
+	//$story = new Story();
   	$name = $authusername;
 	$id = trim($_POST['id']);
 	error_log($id."--2");
