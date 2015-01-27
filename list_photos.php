@@ -3,10 +3,17 @@
 <?php
   // Find all the photos
   $photos = Photograph::find_all();
+  
+  $user = new User ();
+	$auth_user = $user->find_by_id($session->user_id); 
+	$authusername = $auth_user->username;
+	$authfirst = $auth_user->firstname;
+	$authlast = $auth_user->lastname;
+	
 ?>
 <?php include('public/header.php'); ?>
 
-<h2>Photographs</h2>
+<?php echo "<h2>".$authfirst." ".$authlast." your photos</h2> <br><br>"; ?>
 <a href="photo_upload.php">Upload a new photograph</a><br></br>
 <?php echo output_message($message); ?>
 <table class="bordered">
@@ -20,7 +27,11 @@
     <th>Type</th>
 	 <th>&nbsp;</th>
   </tr>
-<?php foreach($photos as $photo):  ?>
+  
+<?php foreach($photos as $photo):
+	if("images/".$authusername == $photo->images_path) {
+		error_log($photo->images_path);
+   ?>
   <tr>
     <td><img src="../<?php echo $photo->image_path(); ?>" width="100" /></td>
 	 <td><?php echo $photo->image_id; ?></td>    
@@ -31,9 +42,9 @@
     <td><?php echo $photo->type; ?></td>
 	 <td><a href="delete_photo.php?id=<?php echo $photo->image_id; ?>">Delete</a></td>  <?php // delete not working ?>
   </tr>
-<?php endforeach; ?>
+<?php 
+	}else{ " "; }
+endforeach; ?>
 </table>
-<br />
-
 
 <?php include('public/footer.php'); ?>

@@ -44,9 +44,9 @@ if (isset($_POST['submit'])) { // Form has been submitted.
 	if($user->save()) {
 			// Success
       $session->message("Registration was successful.");
-			redirect_to('login.php');
 			$dir_path = "images/".$user->username;
 			mkdir($dir_path, 0777);
+			redirect_to('login.php');
 		} else {
 			// Failure
       $session->message("Registration was not successful.");

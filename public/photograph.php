@@ -18,7 +18,7 @@ class Photograph extends DatabaseObject {
 	
 	
   private $temp_path;
-  protected $upload_dir= "images/"; //. $this->username; //do I need "/" in here?
+  protected $upload_dir= "images/"; 
   public $errors=array();
   
   protected $upload_errors = array(
@@ -80,7 +80,7 @@ class Photograph extends DatabaseObject {
 		  }
 			
 			// Determine the target_path
-		  $target_path = $this->upload_dir .'/'. $this->image_name;  //do I need "/" in here?
+		  $target_path = $this->upload_dir .'/'. $this->username .'/'. $this->image_name;  
 		  
 		  // Make sure a file doesn't already exist in the target location
 		  if(file_exists($target_path)) {
@@ -119,7 +119,7 @@ class Photograph extends DatabaseObject {
 		}
 	}
 	public function image_path() {
-	  return $this->upload_dir . $this->image_name; //do I need "/" in here?
+	  return $this->upload_dir .'/'. $this->username .'/'. $this->image_name; //do I need "/" in here?
 	}
 	
 	public function size_as_text() {
