@@ -45,6 +45,8 @@ if (isset($_POST['submit'])) { // Form has been submitted.
 			// Success
       $session->message("Registration was successful.");
 			redirect_to('login.php');
+			$dir_path = "images/".$user->username;
+			mkdir($dir_path, 0777);
 		} else {
 			// Failure
       $session->message("Registration was not successful.");
@@ -71,31 +73,31 @@ if (isset($_POST['submit'])) { // Form has been submitted.
 		    <tr>
 		      <td>Username:</td>
 		      <td>
-			<input type="text" name="username" maxlength="40" value="<?php echo htmlentities($username); ?>" />
+			<input type="text" name="username" maxlength="40" required value="<?php echo htmlentities($username); ?>" />
 		      </td>
 		    </tr>
 		    <tr>
 		      <td>Password:</td>
 		      <td>
-		        <input type="password" name="password" maxlength="40" value="<?php echo htmlentities($password); ?>" />
+		        <input type="password" name="password" min="6" max="12" required value="<?php echo htmlentities($password); ?>" />
 		      </td>
 		    </tr>
 		    <tr>
 		      <td>Email:</td>
 		      <td>
-		        <input type="text" name="email" maxlength="40" value="<?php echo htmlentities($email); ?>" />
+		        <input type="text" name="email" maxlength="40" required value="<?php echo htmlentities($email); ?>" />
 		      </td>
 		    </tr>
 		    <tr>
 		      <td>First Name:</td>
 		      <td>
-		        <input type="text" name="firstname" maxlength="40" value="<?php echo htmlentities($firstname); ?>" />
+		        <input type="text" name="firstname" maxlength="40" required value="<?php echo htmlentities($firstname); ?>" />
 		      </td>
 		    </tr>
 		    <tr>
 		      <td>Last Name:</td>
 		      <td>
-		        <input type="text" name="lastname" maxlength="40" value="<?php echo htmlentities($lastname); ?>" />
+		        <input type="text" name="lastname" maxlength="40" required value="<?php echo htmlentities($lastname); ?>" />
 		      </td>
 		    </tr>
 		    <tr>
