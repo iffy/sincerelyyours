@@ -11,7 +11,6 @@ if (!$session->is_logged_in()) { redirect_to("login.php"); }
 	$authlast = $auth_user->lastname;	
 	
 	$id = $_GET['id'];
-	error_log($id."--1");
 	
 $sanitized_username = $database->escape_value($authusername);
 	$sql = "select * from tbl_guests where username = '{$sanitized_username}'";
@@ -33,16 +32,22 @@ $sanitized_username = $database->escape_value($authusername);
 if (isset($_POST['submit'])) { // Form has been submitted.
 	 //*****this does not show up and I lose the $_GET[$id] at this point also nothing prints here, WHY?******
 	//$story = new Story();
-  	$name = $authusername;
-	$id = trim($_POST['id']);
-	error_log($id."--2");
-  	$stories = htmlentities($_POST['stories']);
-  	$date = trim($_POST['date']);
-	$guest_id =($_POST['guest']);	
+  	$story->name = $authusername;
+	$story->id = trim($_POST['id']);
+  	$story->stories = htmlentities($_POST['stories']);
+  	$story->date = trim($_POST['date']);
+	$story->guest_id =($_POST['guest']);	
 	
-	//***********sql statement below does not work *********
+	$id = $story->id;	
+	$stories = $story->stories;
+	$date = $story->date;
+	$guest_id = $story->guest_id;
+	
+	$db = new MYSQLDatabase();
+	
 	$sql = "UPDATE tbl_story SET stories='$stories', date='$date', guest_id='$guest_id' WHERE id='$id' LIMIT 1";
-	if (mysqli_query($db, $sql)) {
+	$result = $db->query($sql);
+	if ($result != null) {
     echo "Record updated successfully";
     redirect_to("stories.php");
 } else {

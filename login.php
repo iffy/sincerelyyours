@@ -34,12 +34,13 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") { // Form has been submitted.
 
 		<h2>Please Login</h2>
 		<table>
-			<tr>
-				<td width = "90%" colspan="3">
+			<tr >
+				<td width=80% colspan ="3">
 					<?php echo output_message($message); ?>
 				</td>
 				<td>
-					<a href="register.php">Register</a>
+					<a href="register.php">Register</a><P>
+					<a href="reset_password.php">Reset Password</a>
 				</td>
 			</tr>
 		</table>

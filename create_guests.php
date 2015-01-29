@@ -48,25 +48,25 @@ if (isset($_POST['submit'])) { // Form has been submitted.
 		    <tr>
 		      <td>First Name:</td>
 		      <td>
-			<input type="text" name="firstname" maxlength="40" value="<?php echo htmlentities($firstname); ?>" />
+			<input type="text" name="firstname" maxlength="40" required value="<?php echo htmlentities($firstname); ?>" />
 		      </td>
 		    </tr>
 		    <tr>
 		      <td>Last Name:</td>
 		      <td>
-		        <input type="text" name="lastname" maxlength="40" value="<?php echo htmlentities($lastname); ?>" />
+		        <input type="text" name="lastname" maxlength="40" required value="<?php echo htmlentities($lastname); ?>" />
 		      </td>
 		    </tr>
 		    <tr>
 		      <td>Email:</td>
 		      <td>
-		        <input type="text" name="email" maxlength="40" value="<?php echo htmlentities($email); ?>" />
+		        <input type="text" name="email" maxlength="40" required value="<?php echo htmlentities($email); ?>" />
 		      </td>
 		    </tr>
 		    <tr>
 		      <td>Relation:</td>
 		      <td>
-		        <input type="text" name="relation" maxlength="40" value="<?php echo htmlentities($relation); ?>" />
+		        <input type="text" name="relation" maxlength="40" required value="<?php echo htmlentities($relation); ?>" />
 		      </td>
 		    </tr>
 		    <tr>
