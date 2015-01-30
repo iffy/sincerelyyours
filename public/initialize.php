@@ -11,6 +11,8 @@ require_once('public/session.php');
 require_once('public/database.php');
 // this is not used yet but left in for now
 require_once('public/database_object.php');
+require_once("public/PHPMailer/class.phpmailer.php");
+require_once("public/PHPMailer/class.smtp.php");
 
 // load database related class
 require_once('public/user.php');
