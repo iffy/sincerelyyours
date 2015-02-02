@@ -16,7 +16,7 @@ if (!$session->is_logged_in()) { redirect_to("index.php"); }
    $result = $db -> query($sql);
 	if (!$result) {
 		echo"Cannot run query";
-	  echo mysqli_error($db);
+	  	echo mysqli_error($db);
 		exit;
 		}
 	

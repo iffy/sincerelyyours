@@ -1,6 +1,6 @@
-<?php require_once("public/initialize.php"); ?>
-<?php if (!$session->is_logged_in()) { redirect_to("login.php"); } ?>
-<?php
+<?php require_once("public/initialize.php"); 
+ if (!$session->is_logged_in()) { redirect_to("login.php"); } 
+
   // Find all the photos
   $photos = Photograph::find_all();
   

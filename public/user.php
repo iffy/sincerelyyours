@@ -37,6 +37,20 @@ class User extends DatabaseObject {
 	 	return !empty($result_array) ? array_shift($result_array) : false;
 	}
 
+public static function reauthenticate($email="", $password="") {
+    global $database;
+    $username = $database->escape_value(trim($email));
+    $password = $database->escape_value(trim($password));
+
+    $sql  = "SELECT * FROM auth ";
+    $sql .= "WHERE email = '{$email}' ";
+    $sql .= "AND password = '{$password}' ";
+    $sql .= "LIMIT 1";
+    
+    $result_array = self::find_by_sql($sql);
+	 	return !empty($result_array) ? array_shift($result_array) : false;
+	}
+
 	// Common Database Methods
 	public static function find_all() {
 		return self::find_by_sql("SELECT * FROM ".self::$table_name);
