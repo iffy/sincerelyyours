@@ -30,7 +30,7 @@
   
 <?php foreach($photos as $photo):
 	if("images/".$authusername == $photo->images_path) {
-		error_log($photo->images_path);
+		
    ?>
   <tr>
     <td><img src="../<?php echo $photo->image_path(); ?>" width="100" /></td>
@@ -40,7 +40,7 @@
     <td><?php echo $photo->submission_date; ?></td>
     <td><?php echo $photo->size_as_text(); ?></td>
     <td><?php echo $photo->type; ?></td>
-	 <td><a href="delete_photo.php?id=<?php echo $photo->image_id; ?>">Delete</a></td>  <?php // delete not working ?>
+	 <td><a href="delete_photo.php?id=<?php echo $photo->image_id; ?>&name=<?php echo $authusername; ?>">Delete</a></td>
   </tr>
 <?php 
 	}else{ " "; }

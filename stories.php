@@ -26,7 +26,6 @@ if (!$session->is_logged_in()) { redirect_to("login.php"); }
 	<table class="bordered" width="60%">
   <tr>
     <th>Story Id</th>
-    <th>User</th>
     <th>Story Name</th>
     <th>Story</th>
     <th>Date</th>
@@ -38,21 +37,24 @@ if (!$session->is_logged_in()) { redirect_to("login.php"); }
 ?>
   <tr>
     <td width="5%" ><a href="showstory.php?id=<?php echo $story->id; ?>"><?php echo $story->id; ?></a></td> 
-    <td width="5%" ><?php echo $story->name; ?></td>
     <td width="10%" ><?php echo $story->storyname; ?></td>
     <td width="30%" ><?php echo $substringstories; ?> ...</td>
     <td width="10%" ><?php echo $story->date; ?></td>
     <?php
-    	//error_log("1");
-    	//$image_id = $story->image_id;
-		//$result_set = $db->query("SELECT image_name from tbl_image where id = '{$image_id}'");
-		//error_log("2");      
-      //while ($row = $db->fetch_array($result_set)) {
-      //  echo "<td>".$row->image_name."</td>";
-      //}    	
-    	//foreach($photos as $photo):
-		//				if ($story->image_name) 
-		//				{"<td width='15%'><img src='../";$photo_path = $photo->image_path();echo $photo_path;"width='100' /><td>";} endforeach; ?>
+     	error_log("1");
+    	$image_id = $story->image_id;
+		$result = $db->query("SELECT * from tbl_images where image_id = '{$image_id}'");	
+		error_log("2".$image_id);      
+      while ($row = $db->fetch_array($result)) {
+			$filename = $row['images_path']."/".$row['image_name'];      	
+      	if(file_exists($filename)) {
+      	echo "<td><img scr='../".$row['$image_path()']."'width='100' /></td>";   //look at list_photos.php & photograph in public
+      		}else{
+      	echo "<td>Need to Add Picture</td>";
+      		}
+      	}    	
+    	 
+    	 ?>
  </tr>
 <?php 
 }

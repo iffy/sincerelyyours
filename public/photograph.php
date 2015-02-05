@@ -142,7 +142,7 @@ class Photograph extends DatabaseObject {
  
   public static function find_by_id($id=0) {
 	  global $database;
-    $result_array = self::find_by_sql("SELECT * FROM ".self::$table_name." WHERE id=".$database->escape_value($id)." LIMIT 1");
+    $result_array = self::find_by_sql("SELECT * FROM ".self::$table_name." WHERE image_id=".$database->escape_value($id)." LIMIT 1");
 		return !empty($result_array) ? array_shift($result_array) : false;
   } 
   

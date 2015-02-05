@@ -31,9 +31,9 @@ if (!$session->is_logged_in()) { redirect_to("index.php"); }
 								
 	if(isset($_POST['submit'])) {
 		$photo->username = $authusername;
-		$photo->storyname = $_POST['storyname'];
 		$photo->attach_file($_FILES['file_upload']);
 		$photo->submission_date = $_POST['picdate'];
+		$photo->storyname = $_POST['picname'];
 		$photo->images_path = ('images/'.$authusername);
 		$story_id = $_POST['story_id'];
 		if($photo->save()) {
@@ -44,9 +44,9 @@ if (!$session->is_logged_in()) { redirect_to("index.php"); }
 			$sql= "UPDATE tbl_story SET image_id = '{$photo->image_id}' WHERE id = '{$story_id}' ";
 				$result = $db->query($sql);
 				if ($result) {
-    			echo "Record updated successfully";
+    			$session->message("Photograph updated successfully.");
 					} else {
-    				echo "Error updating record: " . mysqli_error($db);
+    				$session->message("Photograph upload failed.")." ". mysqli_error($db);
 					}	
       	$session->message("Photograph uploaded successfully.");
 			redirect_to('list_photos.php'); 
@@ -62,13 +62,43 @@ if (!$session->is_logged_in()) { redirect_to("index.php"); }
 <?php echo "<h2>".$authfirst." ".$authlast." upload your photos</h2> <br><br>"; ?>
 		 
 	<?php echo output_message($message); ?>
- <?php //*************notes to self need to make $story->storyname static some how so I can use in above in the update// ?>
   <form action="photo_upload.php" enctype="multipart/form-data" method="POST">
+<table>  
+	<tr>  
+	<td colspan="2">
     <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max_file_size; ?>" />
-    <p><input type="file" name="file_upload" /></p>
-    <p><select name="story_id"><?php while($story = mysqli_fetch_assoc($result)) { ; echo "<option value='". htmlentities($story['id'])."'>"; echo htmlentities($story['storyname'])."</option>"; } ?></select></p>
-    <p>Picture Date: <input type="text" name="picdate" value="" /></p>
-    <input type="submit" name="submit" value="Upload" />
+	</td>
+	</tr>
+	<tr>
+	<td>Select File:
+	</td> 
+	<td><input type="file" name="file_upload" />
+	</td>
+	</tr>
+	<tr>
+	<td>Choose Story:
+   </td>
+   <td><select name="story_id"><?php while($story = mysqli_fetch_assoc($result)) { ; echo "<option value='". htmlentities($story['id'])."'>"; echo htmlentities($story['storyname'])."</option>"; } ?></select>
+   </td>
+   </tr> 
+   <tr>
+	<td>Picture Name:
+	</td>   
+	<td><input type="text" name="picname" value="" />
+	</td>   
+	</tr> 
+	<tr>
+	<td>Picture Date:
+	</td>
+	<td><input type="text" name="picdate" value="" />
+	</td>
+	<tr>  
+   <td>
+   </td>
+   <td><input type="submit" name="submit" value="Upload" />
+	</td>	
+	</tr>
+</table>
   </form>
    
 <?php include('public/footer.php'); ?>
