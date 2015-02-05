@@ -32,7 +32,8 @@ if (!$session->is_logged_in()) { redirect_to("login.php"); }
 
 <?php echo "<h2>".$authfirst." ".$authlast." your guests</h2> <br><br>" ?>
 
-<a href="create_guests.php">Create Guests</a><br><br><br>
+<a href="create_guests.php">Create Guests</a><br>
+<?php echo output_message($message); ?><br><br>
 <table>
 <?php while($guest = mysqli_fetch_assoc($result)) { ?>
 	 <?php echo "<tr><td>". $guest['firstname']." ".$guest['lastname']."<br>";

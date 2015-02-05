@@ -35,6 +35,9 @@ if (!$session->is_logged_in()) { redirect_to("login.php"); }
   <td><textarea cols="75" rows="20" readonly="readonly" style="background-color: #FFFFFF";> <?php echo $story->stories ;?> </textarea></td><td></td>
   </tr>
   <tr>
+		<td style="white-space: pre-wrap; max-width: 400px;"><?=htmlentities($story->stories)?></td>  
+  </tr>
+  <tr>
   <td>&nbsp; </td><td></td> 
   </tr>
   <tr>

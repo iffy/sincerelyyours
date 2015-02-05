@@ -25,13 +25,12 @@ if (!$session->is_logged_in()) { redirect_to("index.php"); }
 	
 // Remember to give your form's submit tag a name="submit" attribute!
 if (isset($_POST['submit'])) { // Form has been submitted.
-	
 	$story = new Story();
   	$story->name = $authusername;
   	$story->storyname = trim($_POST['storyname']);
   	$story->stories = htmlentities($_POST['stories']);
   	$story->date = trim($_POST['date']);
-	$story->guest_id =($_POST['guest']);	
+	$story->guest_id =implode(",", $_POST['guest']);	
 	
 	if($story->save()) {
 			// Success
@@ -81,7 +80,7 @@ if (isset($_POST['submit'])) { // Form has been submitted.
 		      </td>
 		      <td>
 		      <?php while ($guest = mysqli_fetch_assoc($result)) { 
-		      	echo "<input type='checkbox' name='guest' 'value='". htmlentities($guest['id']).","."'>"; 
+		      	echo "<input type='checkbox' name='guest[]' value='". htmlentities($guest['id'])."'>"; 
 		      	echo htmlentities($guest['firstname'])." ". htmlentities($guest['lastname'])."<br>";}?>
 		      </td>
 		    </tr>

@@ -1,6 +1,13 @@
 <?php
 require_once('public/initialize.php');
-if (!$session->is_logged_in()) { redirect_to("login.php"); }
+
+if ($session->is_logged_in()) {
+	$id = $_GET['id'];
+	if (!isset($id)) {
+		$id = $_POST['id'];	
+	} 
+}else{ redirect_to("login.php"); }
+
 ?>
 
 <?php $user = new User ();
@@ -9,9 +16,7 @@ if (!$session->is_logged_in()) { redirect_to("login.php"); }
 	//echo $authusername;
 	$authfirst = $auth_user->firstname;
 	$authlast = $auth_user->lastname;	
-	
-	$id = $_GET['id'];
-	
+		
 $sanitized_username = $database->escape_value($authusername);
 	$sql = "select * from tbl_guests where username = '{$sanitized_username}'";
 	//database connection is already made and called $db
@@ -26,29 +31,25 @@ $sanitized_username = $database->escape_value($authusername);
 	
 <?php	
 // Find story by id
-  $story = Story::find_by_id($id);	
-   
+   $story = Story::find_by_id($id);	
+	
 // Remember to give your form's submit tag a name="submit" attribute!
 if (isset($_POST['submit'])) { // Form has been submitted.
-	 //*****this does not show up and I lose the $_GET[$id] at this point also nothing prints here, WHY?******
-	//$story = new Story();
+	
   	$story->name = $authusername;
-	$story->id = trim($_POST['id']);
+	$id = trim($_POST['id']);
   	$story->stories = htmlentities($_POST['stories']);
   	$story->date = trim($_POST['date']);
-	$story->guest_id =($_POST['guest']);	
+	$story->guest_id =implode(",", $_POST['guest']);	
 	
-	$id = $story->id;	
 	$stories = $story->stories;
 	$date = $story->date;
 	$guest_id = $story->guest_id;
 	
-	$db = new MYSQLDatabase();
-	
-	$sql = "UPDATE tbl_story SET stories='$stories', date='$date', guest_id='$guest_id' WHERE id='$id' LIMIT 1";
+	$sql = "UPDATE tbl_story SET stories='{$stories}', date='{$date}', guest_id='{$guest_id}' WHERE id='{$id}'";
 	$result = $db->query($sql);
-	if ($result != null) {
-    echo "Record updated successfully";
+	if ($result) {
+    $session->message("Story edited successfully.");
     redirect_to("stories.php");
 } else {
     echo "Error updating record: " . mysqli_error($db);
@@ -97,7 +98,7 @@ if (isset($_POST['submit'])) { // Form has been submitted.
 		      </td>
 		      <td>
 		      <?php while ($guest = mysqli_fetch_assoc($result)) { 
-		      	echo "<input type='checkbox' name='guest' 'value='". htmlentities($guest['id']).","."'>"; 
+		      	echo "<input type='checkbox' name='guest[]' value='". htmlentities($guest['id'])."'>"; 
 		      	echo htmlentities($guest['firstname'])." ". htmlentities($guest['lastname'])."<br>";}?>
 		      </td>
 		    </tr>

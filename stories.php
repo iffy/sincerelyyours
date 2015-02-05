@@ -16,14 +16,12 @@ if (!$session->is_logged_in()) { redirect_to("login.php"); }
 	<a href="writestory.php">Write Story</a><br><br>
 <?php	
 // Find all the stories
-  $storys = Story::find_all();	?>
+  $storys = Story::find_all();	
   
-  <?php
-  // Find photos by storyname
-  //$photos = Photograph::find_by_storyname();
-?>
-	
-	<?php echo output_message($message); ?>
+  $photo = new Photograph();
+  ?>
+  
+ 	<?php echo output_message($message); ?>
 	
 	<table class="bordered" width="60%">
   <tr>
@@ -37,8 +35,6 @@ if (!$session->is_logged_in()) { redirect_to("login.php"); }
 <?php foreach($storys as $story): 
 	if($story->name == $authusername) {
 	$substringstories = substr($story->stories,0,300);
-		
-	//$photos = $storystoryname;
 ?>
   <tr>
     <td width="5%" ><a href="showstory.php?id=<?php echo $story->id; ?>"><?php echo $story->id; ?></a></td> 
@@ -46,12 +42,21 @@ if (!$session->is_logged_in()) { redirect_to("login.php"); }
     <td width="10%" ><?php echo $story->storyname; ?></td>
     <td width="30%" ><?php echo $substringstories; ?> ...</td>
     <td width="10%" ><?php echo $story->date; ?></td>
-    <td width="5%"><img src="images/<?php echo $photos; ?>" width="100" /></td>
+    <?php
+    	//error_log("1");
+    	//$image_id = $story->image_id;
+		//$result_set = $db->query("SELECT image_name from tbl_image where id = '{$image_id}'");
+		//error_log("2");      
+      //while ($row = $db->fetch_array($result_set)) {
+      //  echo "<td>".$row->image_name."</td>";
+      //}    	
+    	//foreach($photos as $photo):
+		//				if ($story->image_name) 
+		//				{"<td width='15%'><img src='../";$photo_path = $photo->image_path();echo $photo_path;"width='100' /><td>";} endforeach; ?>
  </tr>
 <?php 
 }
 endforeach; ?>
 </table>
-	
 	
 <?php include('public/footer.php'); ?>

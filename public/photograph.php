@@ -146,13 +146,7 @@ class Photograph extends DatabaseObject {
 		return !empty($result_array) ? array_shift($result_array) : false;
   } 
   
-   public static function find_by_storyname($storyname=' ') {
-	  global $database;
-    //$result_array = self::find_by_sql("SELECT * FROM ".self::$table_name." WHERE storyname=".$database->escape_value($storyname));
-    $result_array = self::find_by_sql("SELECT * FROM ".self::$table_name." WHERE storyname={storyname} ");
-		return !empty($result_array) ? array_shift($result_array) : false;
-  }
-  
+     
   public static function find_by_sql($sql="") {
     global $database;
     $result_set = $database->query($sql);

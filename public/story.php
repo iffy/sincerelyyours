@@ -6,7 +6,7 @@ require_once('public/database.php');
 class Story extends DatabaseObject {
 	
 	protected static $table_name="tbl_story";
-	protected static $db_fields = array('id', 'name', 'storyname', 'stories','date', 'guest_id'); //JB
+	protected static $db_fields = array('id', 'name', 'storyname', 'stories','date', 'guest_id', 'image_name', 'image_id'); //JB
 	
 	public $id;
 	public $name;
@@ -14,6 +14,8 @@ class Story extends DatabaseObject {
 	public $stories;
 	public $date;
 	public $guest_id;
+	public $image_name;
+	public $image_id;
 	
 
 

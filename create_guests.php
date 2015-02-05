@@ -18,6 +18,7 @@ if (isset($_POST['submit'])) { // Form has been submitted.
   	$guest->lastname = trim($_POST['lastname']);
   	$guest->email = trim($_POST['email']);
   	$guest->relation = trim($_POST['relation']);
+	$guest->password = sha1($guest->email);	
 		
 	if($guest->save()) {
 			// Success
@@ -35,6 +36,7 @@ if (isset($_POST['submit'])) { // Form has been submitted.
   	$lastname	= "";
   	$email		= "";
   	$relation	= "";
+  	
 }
 ?>
 

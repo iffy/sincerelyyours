@@ -6,7 +6,7 @@ require_once('public/database.php');
 class Guest extends DatabaseObject {
 	
 	protected static $table_name="tbl_guests";
-	protected static $db_fields = array('id', 'username', 'firstname', 'lastname', 'email','relation'); //JB
+	protected static $db_fields = array('id', 'username', 'firstname', 'lastname', 'email','relation', 'password'); //JB
 	
 	public $id;
 	public $username;
@@ -14,6 +14,7 @@ class Guest extends DatabaseObject {
 	public $lastname;
 	public $email;
 	public $relation;
+	public $password;
 	
 
 
