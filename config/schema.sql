@@ -78,6 +78,7 @@ CREATE TABLE IF NOT EXISTS `tbl_story` (
   `stories` longtext COLLATE ascii_bin NOT NULL,
   `date` varchar(20) COLLATE ascii_bin NOT NULL,
   `guest_id` varchar(40) COLLATE ascii_bin NOT NULL,
+  `image_name` varchar(40) COLLATE ascii_bin NOT NULL,
   `image_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `name_2` (`name`),
