@@ -54,7 +54,7 @@ $mail->Body			=<<<EMAILBODY
 
 Use the link below to login and change you password.
 
-http://localhost/reset.php?id=$authpassword&name=$authname
+http://localhost/reset.php?id=$authpassword&name=$to_name&email=$to
 
 If you have recieved this email by mistake please login and soon as possible
 and change your password and contact us.
