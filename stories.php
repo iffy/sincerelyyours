@@ -18,7 +18,7 @@ if (!$session->is_logged_in()) { redirect_to("login.php"); }
 // Find all the stories
   $storys = Story::find_all();	
   
-  $photo = new Photograph();
+  $photo = Photograph::find_all();
   ?>
   
  	<?php echo output_message($message); ?>
@@ -41,10 +41,9 @@ if (!$session->is_logged_in()) { redirect_to("login.php"); }
     <td width="30%" ><?php echo $substringstories; ?> ...</td>
     <td width="10%" ><?php echo $story->date; ?></td>
     <?php
-     	error_log("1");
-    	$image_id = $story->image_id;
-		$result = $db->query("SELECT * from tbl_images where image_id = '{$image_id}'");	
-		error_log("2".$image_id);      
+     	$image_id = $story->image_id;
+    	$sql="SELECT * from tbl_images where image_id = '{$image_id}'";
+		$result = $db->query($sql);	     
       while ($row = $db->fetch_array($result)) {
 			$filename = $row['images_path']."/".$row['image_name'];      	
       	if(file_exists($filename)) {
