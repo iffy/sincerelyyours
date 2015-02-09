@@ -7,7 +7,7 @@
     <a href="logout.php">Logout</a> </h3>
     </div>
     
-    <div id="footer">Copyright <?php echo date("Y", time()); ?>, Joseph Barlow</div>
+    <div id="footer">Copyright <?php echo date("Y", time()); ?>, My Stories Are</div>
   </body>
 </html>
 <?php if(isset($database)) { $database->close_connection(); } ?>

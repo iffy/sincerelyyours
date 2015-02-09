@@ -33,7 +33,7 @@ if (!$session->is_logged_in()) { redirect_to("login.php"); }
   </tr>
 <?php foreach($storys as $story): 
 	if($story->name == $authusername) {
-	$substringstories = substr($story->stories,0,300);
+	$substringstories = substr($story->stories,0,200);
 ?>
   <tr>
     <td width="5%" ><a href="showstory.php?id=<?php echo $story->id; ?>"><?php echo $story->id; ?></a></td> 

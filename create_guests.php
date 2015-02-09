@@ -23,7 +23,7 @@ if (isset($_POST['submit'])) { // Form has been submitted.
 	if($guest->save()) {
 			// Success
       $session->message("Guest was saved successfully.");
-			redirect_to('index.php');
+			redirect_to('showguests.php');
 		} else {
 			// Failure
       $session->message("Guest was not saved.");
