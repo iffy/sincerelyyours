@@ -44,7 +44,7 @@ var_dump($i);
 	
 
 <a href="writestory.php">Write Story</a><br><br>
-  <table width = 60%>
+  <table width = 100%>
   <tr>
   <td><h3><?php echo $story->storyname; ?> </td><td></h3></td> 
   </tr>  
@@ -55,8 +55,10 @@ var_dump($i);
   <td>
 	<table>
 		<tr>
-			<td style="white-space: pre-wrap; max-width: 350px;"><?=htmlentities($story->stories); ?></td>
+			<td style="white-space: pre-wrap; max-width:500px;"><?=htmlentities($story->stories); ?></td>
+			<td>&nbsp</td>
 			<td>Guest who can see Story:<br><?php while($guest = mysqli_fetch_assoc($result)) { $guest['firstname']." ".$guest['lastname']."<br>";} ?></td> 
+			<td>&nbsp</td>
 			<td><img src="../<?php echo $photo->image_path(); ?>" /></td> 
 		</tr>  	
   	</table>

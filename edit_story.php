@@ -97,7 +97,7 @@ if (isset($_POST['submit'])) { // Form has been submitted.
 		        <textarea spellcheck="true" Name ="stories" rows="20" cols="75"><?php echo $story->stories; ?></textarea>
 		      </td>
 		      <td>
-		      <?php while ($guest = mysqli_fetch_assoc($result)) { 
+		      <?php while ($guest = mysqli_fetch_assoc($result)) { //these have to remain filled is they were filled in before
 		      	echo "<input type='checkbox' name='guest[]' value='". htmlentities($guest['id'])."'>"; 
 		      	echo htmlentities($guest['firstname'])." ". htmlentities($guest['lastname'])."<br>";}?>
 		      </td>
