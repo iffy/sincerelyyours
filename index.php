@@ -5,7 +5,7 @@ if (!$session->is_logged_in()) { //redirect_to("login.php");
 <?php include('public/header.php'); ?>
 
 <?php include('public/indexfiller.php'); ?>
-	
+
 <?php }else { ?>
 	
 <?php include('public/header.php'); ?>	

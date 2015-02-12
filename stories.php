@@ -23,7 +23,7 @@ if (!$session->is_logged_in()) { redirect_to("login.php"); }
   
  	<?php echo output_message($message); ?>
 	
-	<table class="bordered" width="60%">
+	<table class="bordered" width="65%">
   <tr>
     <th>Story Name</th>
     <th>Story</th>
@@ -35,8 +35,8 @@ if (!$session->is_logged_in()) { redirect_to("login.php"); }
 	$substringstories = substr($story->stories,0,200);
 ?>
   <tr>
-    <td width="15%" ><a href="showstory.php?id=<?php echo $story->id; ?>"><?php echo $story->storyname; ?></a></td> 
-    <td width="30%" ><?php echo $substringstories; ?> ...</td>
+    <td width="10%" ><a href="showstory.php?id=<?php echo $story->id; ?>"><?php echo $story->storyname; ?></a></td> 
+    <td width="25%" ><?php echo $substringstories; ?> ...</td>
     <td width="10%" ><?php echo $story->date; ?></td>
     <?php
      	$image_id = $story->image_id;
@@ -45,9 +45,9 @@ if (!$session->is_logged_in()) { redirect_to("login.php"); }
       while ($row = $db->fetch_array($result)) {
 			$filename = $row['images_path']."/".$row['image_name'];      	
       	if(file_exists($filename)) {
-      	echo "<td><img scr='../".$filename."' width='100' /></td>";   //I have got to get $photo->image_path() where $filename is look at list_photos.php & photograph in public
+      	echo "<td width='20%'><img scr='../".$filename."' width='100' /></td>";   //I have got to get $photo->image_path() where $filename is look at list_photos.php & photograph in public
       		}else{
-      	echo "<td>Need to Add Picture</td>";
+      	echo "<td width='20%'>Need to Add Picture</td>";
       		}
       	}    	
     	 

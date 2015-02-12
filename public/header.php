@@ -9,7 +9,7 @@
     
       <h1>My Stories Are:</h1>
     	
-      <h3> &nbsp A Private Social Network</h3>
+      <h3> &nbsp A Private Social Network for Family History</h3>
     	
     </div>
     <div id="main">

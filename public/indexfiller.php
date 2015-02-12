@@ -1,7 +1,7 @@
 <table width=50%>
 <tr>
 	<td>
-	<h2>The definition of history as defined in the Merriam-Webster Dictionary is that of a tale or a story.<br><br></h2>
+	<h2>The definition of history as defined in the Merriam-Webster Dictionary<p> is that of a tale or a story.<br><br></h2>
 	</td>
 </tr>
 <tr>
