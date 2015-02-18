@@ -30,7 +30,8 @@ if (isset($_POST['submit'])) { // Form has been submitted.
   	$story->storyname = trim($_POST['storyname']);
   	$story->stories = htmlentities($_POST['stories']);
   	$story->date = trim($_POST['date']);
-	$story->guest_id =implode(",", $_POST['guest']);	
+	$story->guest_id =implode(",", $_POST['guest']);
+	$story->comments = trim($_POST['comments']);	
 	
 	if($story->save()) {
 			// Success
@@ -76,7 +77,7 @@ if (isset($_POST['submit'])) { // Form has been submitted.
 		    <tr>
 		      <td>Write Story:</td>
 		      <td>
-		        <textarea spellcheck="true" Name ="stories" rows="20" cols="70"></textarea>
+		        <textarea spellcheck="true" name ="stories" rows="20" cols="70"></textarea>
 		      </td>
 		      <td>
 		      <?php while ($guest = mysqli_fetch_assoc($result)) { 
@@ -85,7 +86,11 @@ if (isset($_POST['submit'])) { // Form has been submitted.
 		      </td>
 		    </tr>
 		    <tr>
-		      <td colspan="3">
+		    	<td colspan="2"> Allow Comments: 
+		    		<input type = 'Radio' Name ='comments' value= '0'>No
+				 	<input type = 'Radio' Name ='comments' value= '1'>Yes
+		    	</td>
+		      <td>
 		      </td>
 		    </tr>
 		    <tr>

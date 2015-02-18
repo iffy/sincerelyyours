@@ -1,36 +1,76 @@
 <?php
+
 // If it's going to need the database, then it's 
 // probably smart to require it before we start.
-require_once('public/database.php');
+require_once(LIB_PATH.DS.'database.php');
 
-class Story extends DatabaseObject {
-	
-	protected static $table_name="tbl_story";
-	protected static $db_fields = array('id', 'name', 'storyname', 'stories','date', 'guest_id', 'email_sent', 'image_id', 'comments'); //JB
-	
-	public $id;
-	public $name;
-	public $storyname;
-	public $stories;
-	public $date;
-	public $guest_id;
-	public $email_sent;
-	public $image_id;
-	public $comments;
-	
+class Comment extends DatabaseObject {
 
+  protected static $table_name="comments";
+  protected static $db_fields=array('id', 'photograph_id', 'created', 'author', 'body');
 
+  public $id;
+  public $photograph_id;
+  public $created;
+  public $author;
+  public $body;
+
+  // "new" is a reserved word so we use "make" (or "build")
+	public static function make($photo_id, $author="Anonymous", $body="") {
+    if(!empty($photo_id) && !empty($author) && !empty($body)) {
+			$comment = new Comment();
+	    $comment->photograph_id = (int)$photo_id;
+	    $comment->created = strftime("%Y-%m-%d %H:%M:%S", time());
+	    $comment->author = $author;
+	    $comment->body = $body;
+	    return $comment;
+		} else {
+			return false;
+		}
+	}
+	
+	public static function find_comments_on($photo_id=0) {
+    global $database;
+    $sql = "SELECT * FROM " . self::$table_name;
+    $sql .= " WHERE photograph_id=" .$database->escape_value($photo_id);
+    $sql .= " ORDER BY created ASC";
+    return self::find_by_sql($sql);
+	}
+	
+	public function try_to_send_notification() {
+		$mail = new PHPMailer();
+
+		$mail->IsSMTP();
+		$mail->Host     = "your.host.com";
+		$mail->Port     = 25;
+		$mail->SMTPAuth = false;
+		$mail->Username = "your_username";
+		$mail->Password = "your_password";
+
+		$mail->FromName = "Photo Gallery";
+		$mail->From     = "";
+		$mail->AddAddress("", "Photo Gallery Admin");
+		$mail->Subject  = "New Photo Gallery Comment";
+    $created = datetime_to_text($this->created);
+		$mail->Body     =<<<EMAILBODY
+
+A new comment has been received in the Photo Gallery.
+
+  At {$created}, {$this->author} wrote:
+
+{$this->body}
+
+EMAILBODY;
+
+		$result = $mail->Send();
+		return $result;
+		
+	}
+	
 	// Common Database Methods
 	public static function find_all() {
 		return self::find_by_sql("SELECT * FROM ".self::$table_name);
   }
-  
-public static function find_by_name($name) {
-		global $database;
-		$sanitized_name = $database->escape_value($name);
-		$sql = ("select * from " .self::$table_name. " where name = '{$sanitized_name}' ");		
-		return $result_set = $database->query($sql);
-  }  
   
   public static function find_by_id($id=0) {
     $result_array = self::find_by_sql("SELECT * FROM ".self::$table_name." WHERE id={$id} LIMIT 1");
@@ -47,6 +87,14 @@ public static function find_by_name($name) {
     return $object_array;
   }
 
+	public static function count_all() {
+	  global $database;
+	  $sql = "SELECT COUNT(*) FROM ".self::$table_name;
+    $result_set = $database->query($sql);
+	  $row = $database->fetch_array($result_set);
+    return array_shift($row);
+	}
+
 	private static function instantiate($record) {
 		// Could check that $record exists and is an array
     $object = new self;
@@ -54,9 +102,8 @@ public static function find_by_name($name) {
 		// $object->id 				= $record['id'];
 		// $object->username 	= $record['username'];
 		// $object->password 	= $record['password'];
-		// $object->email 	= $record['email'];
-		// $object->firstname   = $record['firstname'];
-		// $object->lastname 	= $record['lastname'];
+		// $object->first_name = $record['first_name'];
+		// $object->last_name 	= $record['last_name'];
 		
 		// More dynamic, short-form approach:
 		foreach($record as $attribute=>$value){
@@ -159,6 +206,5 @@ public static function find_by_name($name) {
 	}
 
 }
-
 
 ?>

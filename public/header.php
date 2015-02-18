@@ -6,10 +6,9 @@
   </head>
   <body>
     <div id="header">
-    
-      <h1>My Stories Are:</h1>
-    	
-      <h3> &nbsp A Private Social Network for Family History</h3>
+    &nbsp<br>
+     &nbsp <img src="images/logo.png" alt="My Stories Are - A Family History" style="width:200px;height:100px">
+    	<h3> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp A Private Social Network for Family History</h3>
     	
     </div>
     <div id="main">

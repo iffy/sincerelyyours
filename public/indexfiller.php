@@ -50,6 +50,8 @@
 	What secrets have you kept since childhood that you are aching to tell?<br>
 	Now that your children are grown what do you what them to know?<br>
 	During your lifetime what has changed, politics, technology, society?<br>
+	<br>
+	<a href="sbys.php">Getting Started</a>
 	</td>
 </tr>
 </table>

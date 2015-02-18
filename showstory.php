@@ -55,7 +55,7 @@ var_dump($i);
   <td>
 	<table>
 		<tr>
-			<td style="white-space: pre-wrap; max-width:500px;"><?=htmlentities($story->stories); ?></td>
+			<td style="white-space: pre-wrap; max-width:500px;"><?php echo htmlentities($story->stories); ?></td>
 			<td>&nbsp</td>
 			<td>Guest who can see Story:<br><?php while($guest = mysqli_fetch_assoc($result)) { $guest['firstname']." ".$guest['lastname']."<br>";} ?></td> 
 			<td>&nbsp</td>
