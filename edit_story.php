@@ -40,13 +40,16 @@ if (isset($_POST['submit'])) { // Form has been submitted.
 	$id = trim($_POST['id']);
   	$story->stories = htmlentities($_POST['stories']);
   	$story->date = trim($_POST['date']);
-	$story->guest_id =implode(",", $_POST['guest']);	
+	$story->guest_id =implode(",", $_POST['guest']);
+	$story->comments = trim($_POST['comments']);	
+		
 	
 	$stories = $story->stories;
 	$date = $story->date;
 	$guest_id = $story->guest_id;
+	$comments = $story->comments;
 	
-	$sql = "UPDATE tbl_story SET stories='{$stories}', date='{$date}', guest_id='{$guest_id}' WHERE id='{$id}'";
+	$sql = "UPDATE tbl_story SET stories='{$stories}', date='{$date}', guest_id='{$guest_id}', comments='{$comments}'  WHERE id='{$id}'";
 	$result = $db->query($sql);
 	if ($result) {
     $session->message("Story edited successfully.");
@@ -94,16 +97,20 @@ if (isset($_POST['submit'])) { // Form has been submitted.
 		    <tr>
 		      <td>Edit Story:</td>
 		      <td>
-		        <textarea spellcheck="true" Name ="stories" rows="20" cols="75"><?php echo $story->stories; ?></textarea>
+		        <textarea spellcheck="true" name ="stories" rows="20" cols="75"><?php echo $story->stories; ?></textarea>
 		      </td>
 		      <td>
-		      <?php while ($guest = mysqli_fetch_assoc($result)) { 
-		      	echo "<input type='checkbox' name='guest[]' value='". htmlentities($guest['id'])."'>"; 
-		      	echo htmlentities($guest['firstname'])." ". htmlentities($guest['lastname'])."<br>";}?>
+		      <?php while ($guest = mysqli_fetch_assoc($result)) { //these have to remain filled is they were filled in before
+		      	echo "<input type='checkbox' name='guest[]' value='".$guest['id']."'>"; 
+		      	echo $guest['firstname']." ".$guest['lastname']."<br>";}?>
 		      </td>
 		    </tr>
 		    <tr>
-		      <td colspan="3">
+		      <td colspan="2">Allow Comments: 
+		    		<input type = 'Radio' Name ='comments' value= '0'>No
+				 	<input type = 'Radio' Name ='comments' value= '1'>Yes
+		      </td>
+		      <td>
 		      </td>
 		    </tr>
 		    <tr>

@@ -1,6 +1,6 @@
 <?php
 require_once('public/initialize.php');
-if (!$session->is_logged_in()) { redirect_to("index.php"); }
+if (!$session->is_logged_in()) { redirect_to("login.php"); }
 ?>
 <?php
 	$max_file_size = 1048576;   // expressed in bytes
