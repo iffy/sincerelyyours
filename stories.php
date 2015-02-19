@@ -38,20 +38,12 @@ if (!$session->is_logged_in()) { redirect_to("login.php"); }
     <td width="10%" ><a href="showstory.php?id=<?php echo $story->id; ?>"><?php echo $story->storyname; ?></a></td> 
     <td width="25%" ><?php echo $substringstories; ?> ...</td>
     <td width="10%" ><?php echo $story->date; ?></td>
-    <?php
-     	$image_id = $story->image_id;
-    	$sql="SELECT * from tbl_images where image_id = '{$image_id}'";
-		$result = $db->query($sql);	     
-      while ($row = $db->fetch_array($result)) {
-			$filename = $row['images_path']."/".$row['image_name'];      	
-      	if(file_exists($filename)) {
-      	echo "<td width='20%'><img scr='../".$filename."' width='100' /></td>";   //I have got to get $photo->image_path() where $filename is look at list_photos.php & photograph in public
-      		}else{
-      	echo "<td width='20%'>Need to Add Picture</td>";
-      		}
-      	}    	
-    	 
-    	 ?>
+    <td width="20%">
+      <?php
+        $photo = Photograph ::find_by_id($story->image_id);  
+      	echo "<img src=\"".$photo->image_url()."\" />";
+      ?>
+    </td>
  </tr>
 <?php 
 }

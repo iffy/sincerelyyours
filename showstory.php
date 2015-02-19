@@ -59,7 +59,7 @@ var_dump($i);
 			<td>&nbsp</td>
 			<td>Guest who can see Story:<br><?php while($guest = mysqli_fetch_assoc($result)) { $guest['firstname']." ".$guest['lastname']."<br>";} ?></td> 
 			<td>&nbsp</td>
-			<td><img src="../<?php echo $photo->image_path(); ?>" /></td> 
+			<td><img src="<?php echo $photo->image_url(); ?>" /></td> 
 		</tr>  	
   	</table>
   </td>

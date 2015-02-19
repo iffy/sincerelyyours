@@ -33,7 +33,7 @@
 		
    ?>
   <tr>
-    <td><img src="../<?php echo $photo->image_path(); ?>" width="100" /></td>
+    <td><img src="<?php echo $photo->image_url(); ?>" width="100" /></td>
 	 <td><?php echo $photo->image_id; ?></td>    
     <td><?php echo $photo->storyname; ?></td>
 	 <td><?php echo $photo->image_name; ?></td>
