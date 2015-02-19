@@ -1,10 +1,10 @@
 db:
-  image: mysql
+  image: mysql:5.5.42
   environment:
     - MYSQL_ROOT_PASSWORD=mysecretpassword
     - MYSQL_USER=web
     - MYSQL_PASSWORD=password
-    - MYSQL_DATABASE=normaldb
+    - MYSQL_DATABASE=story
 web:
   build: .
   volumes:
@@ -18,5 +18,5 @@ web:
     - MYSQL_USER=web
     - MYSQL_HOST=db
     - MYSQL_PASSWORD=password
-    - MYSQL_DATABASE=normaldb
+    - MYSQL_DATABASE=story
     - MYSQL_PORT=3306

@@ -35,8 +35,8 @@ if (!$session->is_logged_in()) { redirect_to("login.php"); }
 	$substringstories = substr($story->stories,0,200);
 ?>
   <tr>
-    <td width="10%" ><a href="showstory.php?id=<?php echo $story->id; ?>"><?php echo $story->storyname; ?></a></td> 
-    <td width="25%" ><?php echo $substringstories; ?> ...</td>
+    <td width="10%" ><a href="showstory.php?id=<?php echo $story->id; ?>"><?php echo htmlentities($story->storyname); ?></a></td> 
+    <td width="25%" ><?php echo htmlentities($substringstories); ?> ...</td>
     <td width="10%" ><?php echo $story->date; ?></td>
     <?php
      	$image_id = $story->image_id;

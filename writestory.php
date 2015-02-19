@@ -28,7 +28,7 @@ if (isset($_POST['submit'])) { // Form has been submitted.
 	$story = new Story();
   	$story->name = $authusername;
   	$story->storyname = trim($_POST['storyname']);
-  	$story->stories = htmlentities($_POST['stories']);
+  	$story->stories = trim($_POST['stories']);
   	$story->date = trim($_POST['date']);
 	$story->guest_id =implode(",", $_POST['guest']);
 	$story->comments = trim($_POST['comments']);	
