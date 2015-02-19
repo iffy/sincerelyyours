@@ -17,15 +17,11 @@ installing docker then install [fig](http://www.fig.sh/) like this:
 
 Start afresh and make a new database:
 
-    fig rm --force && fig up db
+    fig stop; fig rm --force
 
-Press Control-C when it's done, then bring up the database in the background:
+Start/restart the web app and database:
 
-    fig start db
-
-Start/restart the web app:
-
-    fig build web && fig up web
+    fig up
 
 Populate the database with empty schema (I can't figure out a better way to do
 this yet):
