@@ -6,15 +6,13 @@ require_once('public/database.php');
 class Story extends DatabaseObject {
 	
 	protected static $table_name="tbl_story";
-	protected static $db_fields = array('id', 'name', 'storyname', 'stories','date', 'guest_id', 'email_sent', 'image_id', 'comments'); //JB
+	protected static $db_fields = array('id', 'name', 'storyname', 'stories','date', 'image_id', 'comments');
 	
 	public $id;
 	public $name;
 	public $storyname;
 	public $stories;
 	public $date;
-	public $guest_id;
-	public $email_sent;
 	public $image_id;
 	public $comments;
 	

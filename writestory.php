@@ -25,17 +25,30 @@ if (!$session->is_logged_in()) { redirect_to("index.php"); }
 	
 // Remember to give your form's submit tag a name="submit" attribute!
 if (isset($_POST['submit'])) { // Form has been submitted.
+
 	$story = new Story();
   	$story->name = $authusername;
   	$story->storyname = trim($_POST['storyname']);
   	$story->stories = trim($_POST['stories']);
   	$story->date = trim($_POST['date']);
-	$story->guest_id =implode(",", $_POST['guest']);
+	//$story->guest_id =implode(",", $_POST['guest']);
 	$story->comments = trim($_POST['comments']);	
+	$storyname = $story->storyname;
 	
 	if($story->save()) {
-			// Success
+					// Success
       $session->message("Story was saved successfully.");
+      	$sql = "SELECT id FROM tbl_story where name = '{$storyname}'"; //cannot pull just id
+			$result = $db -> query($sql);
+			var_dump($result);
+			if (!$result) {
+		echo"Cannot save ID";
+	  echo mysqli_error($db);
+		exit;
+		}else{
+			$sql = "INSERT INTO tbl_story_guest story_id VALUES '{$result}'";	//this must be done for every guest and story!
+			$database->query($sql);	
+		}
 			redirect_to('stories.php');
 		} else {
 			// Failure
