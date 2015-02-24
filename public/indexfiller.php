@@ -51,7 +51,7 @@
 	Now that your children are grown what do you what them to know?<br>
 	During your lifetime what has changed, politics, technology, society?<br>
 	<br>
-	<a href="sbys.php">Getting Started</a>
+	<a href="mystory.php">My Story</a> <a href="sbys.php">Getting Started</a>
 	</td>
 </tr>
 </table>

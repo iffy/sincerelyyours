@@ -24,3 +24,32 @@ a { color: #8D0D19;}
   background: #1A446C;  color: #D4E6F4; }
 
 table.bordered tr th, table.bordered tr td { border: 1px solid #000000; }
+
+ol {
+    display: inline-block;
+    list-style-type: none;
+    margin-top: 0em;
+    margin-bottom: 3em;
+    margin-left: 0;
+    margin-right: 0px;
+    padding-left: 140px;
+}
+li {
+ float: left;
+  margin: 0 10px;
+}
+
+
+.example1 a:link {text-decoration:none; color:white;}
+.example1 a:visited {text-decoration:none; color:white;}
+.example1 a:hover {text-decoration:none;color:white;}
+.example1 a:active {color:whitesmoke;text-decoration: none}
+
+
+
+
+
+
+
+
+
