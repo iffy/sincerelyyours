@@ -1,4 +1,5 @@
 <?php
+$title = "Guests for Social Networking";
 require_once('public/initialize.php');
 
 if (!$session->is_logged_in()) { redirect_to("index.php"); }

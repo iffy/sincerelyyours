@@ -1,4 +1,6 @@
-<?php require_once("../../includes/initialize.php"); ?>
+<?php 
+$title = "Comment on Story";
+require_once("../../includes/initialize.php"); ?>
 <?php if (!$session->is_logged_in()) { redirect_to("login.php"); } ?>
 <?php
 	if(empty($_GET['id'])) {

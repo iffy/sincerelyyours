@@ -40,7 +40,7 @@ if (isset($_POST['submit'])) { // Form has been submitted.
 	$id = trim($_POST['id']);
   	$story->stories = htmlentities($_POST['stories']);
   	$story->date = trim($_POST['date']);
-	$story->guest_id =implode(",", $_POST['guest']);
+	//$story->guest_id =implode(",", $_POST['guest']);
 	$story->comments = trim($_POST['comments']);	
 		
 	
@@ -49,7 +49,7 @@ if (isset($_POST['submit'])) { // Form has been submitted.
 	$guest_id = $story->guest_id;
 	$comments = $story->comments;
 	
-	$sql = "UPDATE tbl_story SET stories='{$stories}', date='{$date}', guest_id='{$guest_id}', comments='{$comments}'  WHERE id='{$id}'";
+	$sql = "UPDATE tbl_story SET stories='{$stories}', date='{$date}', comments='{$comments}'  WHERE id='{$id}'";
 	$result = $db->query($sql);
 	if ($result) {
     $session->message("Story edited successfully.");

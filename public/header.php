@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>My Stories Are</title>
+    <title><?php echo "My Stories Are - " .$title ?></title>
     
     <link href="public/main.css" media="all" rel="stylesheet" type="text/css" />
   </head>
