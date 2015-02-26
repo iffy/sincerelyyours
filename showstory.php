@@ -15,26 +15,23 @@ if (!$session->is_logged_in()) { redirect_to("login.php"); }
 	
 <?php	
 // Find story by id
-  $story = Story::find_by_id($id);	
+  $story = Story::find_by_id($id);
 
-$guestid = $story->guest_id;
-var_dump($guestid);  
-$imageid = $story->image_id;
+  $guests = array();
+  $story_id = $story->id;
+  $sql = ("SELECT guest_id
+    FROM tbl_story_guest
+    WHERE story_id = '{$story_id}'");
+  $result = $database->query($sql);
+  while ($row = mysqli_fetch_assoc($result)) {
+    $guest = Guest::find_by_id($row['guest_id']);
+    array_push($guests, $guest);
+  }
+
+  $imageid = $story->image_id;
   
   $photo = Photograph ::find_by_id($imageid);  
-  
-  $guest_id = explode(",",$guestid);  //I don't know what I am doing here!!! See var_dumps it looks like it should work.
-    for($i = 0; $i < count($guest_id); $i++){
-		$sql = "SELECT * FROM tbl_guests WHERE id = '{$i}'" ;    
-     	$result = $db -> query($sql);
-var_dump($i);			
-			if (!$result) {
-		echo"Cannot run query";
-	  echo mysqli_error($db);
-	  	exit;
-		}     
-     
-     }    
+
      
     ?>
 
@@ -57,7 +54,10 @@ var_dump($i);
 		<tr>
 			<td style="white-space: pre-wrap; max-width:500px;"><?php echo htmlentities($story->stories); ?></td>
 			<td>&nbsp</td>
-			<td>Guest who can see Story:<br><?php while($guest = mysqli_fetch_assoc($result)) { $guest['firstname']." ".$guest['lastname']."<br>";} ?></td> 
+			<td>Guest who can see Story:<br><?php foreach($guests as $guest) {
+          echo htmlentities($guest->firstname)." ".htmlentities($guest->lastname)."<br/>";
+      } ?>
+      </td>
 			<td>&nbsp</td>
 			<td><img src="<?php echo $photo->image_url(); ?>" / width="400"></td> 
 		</tr>  	

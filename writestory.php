@@ -37,9 +37,8 @@ if (isset($_POST['submit'])) { // Form has been submitted.
 	if($story->save()) {
 		// Success
 		$session->message("Story was saved successfully.");
-		error_log(print_r($_POST, true));
+		$story_id = $story->id;
 		foreach($_POST['guest'] as $guest_id) {
-			error_log('guest: '. $guest_id);
 			$sanitized_guest_id = $database->escape_value($guest_id);
 			$sql = "INSERT INTO tbl_story_guest (story_id, guest_id) VALUES ('$story_id', '{$sanitized_guest_id}');";
 			$database->query($sql);

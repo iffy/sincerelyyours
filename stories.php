@@ -41,8 +41,10 @@ if (!$session->is_logged_in()) { redirect_to("login.php"); }
     <td width="10%" ><?php echo $story->date; ?></td>
     <td width="20%">
       <?php
-        $photo = Photograph ::find_by_id($story->image_id);  
-      	echo "<img src=\"".$photo->image_url()."\"  width='100' />";
+        $photo = Photograph::find_by_id($story->image_id);
+        if ($photo) {
+          echo "<img src=\"".$photo->image_url()."\"  width='100' />";  
+        }
       ?>
     </td>
  </tr>
